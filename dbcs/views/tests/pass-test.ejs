@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест | <%= test.topic %></title>
+    <link rel="stylesheet" href="/css_files/style_pass-test.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <%
+        if (typeof message !== 'undefined'){
+            %>
+                <input type="hidden" id="query_message" name="query_message" value="<%= message %>">
+                <input type="hidden" id="query_number" name="query_number" value="<%= task_number %>">
+            <%
+        } 
+    %>
+    
+    <form name="myform" action="" method="post">
+        <section>
+            <div class="main">
+                <fieldset>
+                    <legend>Тема тестирования</legend>
+                    <div class="topicBody">
+                        <div class="topicbox">
+                            <h1><%= test.topic %></h1>
+                        </div>
+                    </div>
+                    <p id="count-down"></p>
+                </fieldset>
+            </div>
+
+            <div class="box_zaglushka">
+                <input type="hidden" id="zaglushka" name="zaglushka" value="<%= JSON.stringify(test) %>">
+                <input type="hidden" id="starting_data" name="starting_data" value="<%= JSON.stringify(reply) %>">
+                <!-- консервация -->
+            </div>
+            
+            <div id="testInputs">
+                
+            </div>
+
+            <input type="hidden" name="id" value="<%= test.id %>">
+        </section>
+        
+        <div class="button_send">
+            <button type="submit" id="close_test" name="button" value="close_test" class="buttonFinish">Завершить тестирование</button>
+        </div>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/css_files/quiz_file.js"></script>
+
+    <script>
+        const textarea = document.querySelectorAll('textarea')
+        const lineNumbers = document.querySelectorAll('.line-numbers')
+
+        for (let i = 0; i < textarea.length; i++) {
+            textarea[i].addEventListener('keyup', event => {
+                const numberOfLines = event.target.value.split('\n').length
+        
+                lineNumbers[i].innerHTML = Array(numberOfLines)
+                    .fill('<span></span>')
+                    .join('')
+            })
+  
+            textarea[i].addEventListener('keydown', event => {
+                if (event.key === 'Tab') {
+                    const start = textarea[i].selectionStart
+                    const end = textarea[i].selectionEnd
+        
+                    textarea[i].value = textarea[i].value.substring(0, start) + '\t' + textarea[i].value.substring(end)
+        
+                    event.preventDefault()
+                }
+            })
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $('#showHere').html(document.getElementById("query_message").value);
+    </script>
+</body>
+</html>

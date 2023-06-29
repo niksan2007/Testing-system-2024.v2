@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать профиль</title>
+    <link rel="stylesheet" href="/css_files/style_edit_student.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <%
+        if (user.image != null){
+            photo = user.image;
+        } else {
+            photo = "default.jpg"
+        }
+    %>
+    <div class="form-box">
+        <img src="userImages/<%= photo %>" width="150px" height="150px" alt="<%= user.image %>">
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <br><br>
+            <input type="file" name="image">
+            <input type="hidden" name="user_id" value="<%= user._id %>">
+            <br><br>
+            <input type="text" name="surname" value="<%= user.surname %>" placeholder="Редактировать фамилию" required>
+            <br><br>
+            <input type="text" name="name" value="<%= user.name %>" placeholder="Редактировать имя" required>
+            <br><br>
+            <input type="text" name="patronim" value="<%= user.patronim %>" placeholder="Редактировать отчество">
+            <br><br>
+            <input type="email" name="email" value="<%= user.email %>" placeholder="Редактировать почту" required>
+            <br><br>
+            <input type="submit" value="Обновить данные">
+        
+        </form>
+    </div>
+</body>
+</html>

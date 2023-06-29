@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор тестов</title>
+    <link rel="stylesheet" href="/css_files/style_construct.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <section>
+            <div class="main">
+                <fieldset>
+                    <legend>Укажите длительность тестирования</legend>
+                    <div class="counter">
+                        <span tooltip="Максимум: 30 дней" flow="down">
+                            <button id="minus_day" type="button">-</button>
+                            <input type="text" id='dayscores' class="dayscores" name="test_remaining" value="<%= test.numberRemaining %>" required>
+                            <button id="plus_day" type="button">+</button>
+                        </span>
+                    </div>
+                </fieldset>
+            </div>
+    
+            <div class="main">
+                <fieldset>
+                    <legend>Напишите тему тестирования</legend>
+                    <div class="topicBody">
+                        <div class="topicbox">
+                            <input type="text" name="topic" id="topic" value="<%= test.topic %>"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="box_zaglushka">
+                <input type="hidden" id="zaglushka" name="zaglushka" value="<%= JSON.stringify(test) %>">
+                <!-- консервация -->
+            </div>
+            
+            <div id="testInputs">
+                
+            </div>
+
+            <input type="hidden" name="id" value="<%= test.id %>">
+        </section>
+        
+        <div class="button_send">
+            <input type="submit" value="Редактировать тест" class="btn_up">
+        </div>
+    </form>
+
+    <script src="/css_files/update_tasks.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('#main_solution1').change(function() { $('#solution_sub1').val($(this).val()); });
+        $('#main_solution2').change(function() { $('#solution_sub2').val($(this).val()); });
+        $('#main_solution3').change(function() { $('#solution_sub3').val($(this).val()); });
+        $('#main_solution4').change(function() { $('#solution_sub4').val($(this).val()); });
+        $('#main_solution5').change(function() { $('#solution_sub5').val($(this).val()); });
+        $('#main_solution6').change(function() { $('#solution_sub6').val($(this).val()); });
+        $('#main_solution7').change(function() { $('#solution_sub7').val($(this).val()); });
+        $('#main_solution8').change(function() { $('#solution_sub8').val($(this).val()); });
+        $('#main_solution9').change(function() { $('#solution_sub9').val($(this).val()); });
+        $('#main_solution10').change(function() { $('#solution_sub10').val($(this).val()); });
+
+        $('#main_photo1').change(function() { $('#photo_sub1').val($(this).val()); });
+        $('#main_photo2').change(function() { $('#photo_sub2').val($(this).val()); });
+        $('#main_photo3').change(function() { $('#photo_sub3').val($(this).val()); });
+        $('#main_photo4').change(function() { $('#photo_sub4').val($(this).val()); });
+        $('#main_photo5').change(function() { $('#photo_sub5').val($(this).val()); });
+        $('#main_photo6').change(function() { $('#photo_sub6').val($(this).val()); });
+        $('#main_photo7').change(function() { $('#photo_sub7').val($(this).val()); });
+        $('#main_photo8').change(function() { $('#photo_sub8').val($(this).val()); });
+        $('#main_photo9').change(function() { $('#photo_sub9').val($(this).val()); });
+        $('#main_photo10').change(function() { $('#photo_sub10').val($(this).val()); });
+
+        $('#main_genTable1').change(function() { $('#genTable_sub1').val($(this).val()); });
+        $('#main_genTable2').change(function() { $('#genTable_sub2').val($(this).val()); });
+        $('#main_genTable3').change(function() { $('#genTable_sub3').val($(this).val()); });
+        $('#main_genTable4').change(function() { $('#genTable_sub4').val($(this).val()); });
+        $('#main_genTable5').change(function() { $('#genTable_sub5').val($(this).val()); });
+        $('#main_genTable6').change(function() { $('#genTable_sub6').val($(this).val()); });
+        $('#main_genTable7').change(function() { $('#genTable_sub7').val($(this).val()); });
+        $('#main_genTable8').change(function() { $('#genTable_sub8').val($(this).val()); });
+        $('#main_genTable9').change(function() { $('#genTable_sub9').val($(this).val()); });
+        $('#main_genTable10').change(function() { $('#genTable_sub10').val($(this).val()); });
+
+        $('#main_testData1').change(function() { $('#testData_sub1').val($(this).val()); });
+        $('#main_testData2').change(function() { $('#testData_sub2').val($(this).val()); });
+        $('#main_testData3').change(function() { $('#testData_sub3').val($(this).val()); });
+        $('#main_testData4').change(function() { $('#testData_sub4').val($(this).val()); });
+        $('#main_testData5').change(function() { $('#testData_sub5').val($(this).val()); });
+        $('#main_testData6').change(function() { $('#testData_sub6').val($(this).val()); });
+        $('#main_testData7').change(function() { $('#testData_sub7').val($(this).val()); });
+        $('#main_testData8').change(function() { $('#testData_sub8').val($(this).val()); });
+        $('#main_testData9').change(function() { $('#testData_sub9').val($(this).val()); });
+        $('#main_testData10').change(function() { $('#testData_sub10').val($(this).val()); });
+    </script>
+</body>
+</html>

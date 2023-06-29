@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система тестирования</title>
+    <link rel="stylesheet" href="/css_files/style_login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#">Справочник</a>
+            <a href="/briefpage">О веб-сайте</a>
+
+            <%
+                if (typeof message !== 'undefined') {
+                    %>
+                        <div class="toast active">
+                            <div class="toast-content">
+                                <i class='bx bxs-bell-ring check'></i>
+
+                                <div class="message">
+                                    <span class="text text-1">Оповещение</span>
+                                    <span class="text text-2"><%= message %></span>
+                                </div>
+                            </div>
+                            <i class='bx bx-x-circle close'></i>
+                            <div class="progress active"></div>
+                        </div>
+                    <%
+                }
+            %>
+        </nav>
+    </header>
+
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="/login" method="post">
+                    <h2>Вход в аккаунт</h2>
+                    <div class="inputbox">
+                        <ion-icon name="mail-open-outline"></ion-icon>
+                        <input type="email" name="email" placeholder=" " required>
+                        <label for="">Почта</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <ion-icon name="lock-open-outline"></ion-icon>
+                        <input type="password" name="password" placeholder=" " required>
+                        <label for="">Пароль</label>
+                    </div>
+
+                    <div class="forget">
+                        <a href="/forget">Забыли пароль?</a>
+                    </div>
+
+                    <input type="submit" value="Войти" class="btn_sign_in">
+
+                    <div class="register">
+                        <a href="/register">Зарегистрироваться?</a>
+                        <br><br>
+                        <a href="/verification">Не получилось верифицироваться?</a>
+                        <br><br>
+                        <a href="/admin">Вход администратора</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/css_files/notesc.js"></script>
+</body>
+</html>
