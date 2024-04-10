@@ -11,7 +11,7 @@ const config = require('../config/config');
 const nodemailer = require('nodemailer');
 const excelJS = require('exceljs');
 
-const securePassword = async(password)=>{
+const securePassword = async (password) => {
     try {
         const passwordHash = await bcrypt.hash(password, 10);
         return passwordHash;
@@ -21,7 +21,7 @@ const securePassword = async(password)=>{
     }
 };
 
-const sendNotification = async(name, email, password)=> {
+const sendNotification = async (name, email, password) => {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -39,7 +39,7 @@ const sendNotification = async(name, email, password)=> {
             subject: 'Оповещение об учётной записи',
             html: '<p> Здравствуй, ' + name + '. Данные для авторизации.</p> <br><b>Почта: </b>' + email + '<br><b>Пароль: </b>' + password
         };
-        transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptions, function(error, info) {
             if (error) {
                 console.log(error);
             } else {
@@ -53,7 +53,7 @@ const sendNotification = async(name, email, password)=> {
     }
 };
 
-const sendResetPasswordMail = async(name, email, token_pass)=> {
+const sendResetPasswordMail = async (name, email, token_pass) => {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -71,7 +71,7 @@ const sendResetPasswordMail = async(name, email, token_pass)=> {
             subject: 'Восстановление пароля',
             html: '<p> Здравствуй, ' + name + '. Ссылка для <a href="http://127.0.0.1:3000/admin/forget-password?token_pass=' + token_pass + '"> восстановления</a> вашего пароля. </p>'
         };
-        transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptions, function(error, info) {
             if (error) {
                 console.log(error);
             } else {
@@ -85,7 +85,7 @@ const sendResetPasswordMail = async(name, email, token_pass)=> {
     }
 };
 
-const loadLogin = async(req, res) => {
+const loadLogin = async (req, res) => {
     try {
         res.render('login');
     } catch (error) {
@@ -93,16 +93,16 @@ const loadLogin = async(req, res) => {
     }
 };
 
-const verifyLogin = async(req, res) => {
+const verifyLogin = async (req, res) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
-        const userData = await User.findOne({email:email});
+        const userData = await User.findOne({ email: email });
         if (userData) {
             const passwordMatch = await bcrypt.compare(password, userData.password);
             if (passwordMatch) {
                 if (userData.is_admin === 0) {
-                    res.render('login', {message: "Недостаточно прав"});
+                    res.render('login', { message: "Недостаточно прав" });
                 } else {
                     req.session.token_admin = userData._id;
                     console.log(`Администратор ${userData.surname} ${userData.name} начал сессию в сервисе`);
@@ -111,10 +111,10 @@ const verifyLogin = async(req, res) => {
                 }
 
             } else {
-                res.render('login', {message: "Некорректная почта или пароль"});
+                res.render('login', { message: "Некорректная почта или пароль" });
             }
         } else {
-            res.render('login', {message: "Такой учётной записи не существует в базе"});
+            res.render('login', { message: "Такой учётной записи не существует в базе" });
         }
     } catch (error) {
         console.log(error.message);
@@ -122,16 +122,16 @@ const verifyLogin = async(req, res) => {
 
 };
 
-const loadDashboard = async(req, res) => {
+const loadDashboard = async (req, res) => {
     try {
         const userData = await User.findById({ _id: req.session.token_admin });
-        res.render('home', {admin: userData});
+        res.render('home', { admin: userData });
     } catch (error) {
         console.log(error.message);
     }
 };
 
-const logout = async(req, res) => {
+const logout = async (req, res) => {
     try {
         console.log(`Администратор с токеном req.session.token_admin = ${req.session.token_admin} закончил сессию в сервисе`);
         req.session.destroy();
@@ -143,7 +143,7 @@ const logout = async(req, res) => {
 
 };
 
-const forgetLoad = async(req, res) => {
+const forgetLoad = async (req, res) => {
     try {
         res.render('forget');
     } catch (error) {
@@ -152,21 +152,21 @@ const forgetLoad = async(req, res) => {
 
 };
 
-const forgetVerify = async(req, res) => {
+const forgetVerify = async (req, res) => {
     try {
         const email = req.body.email;
-        const userData = await User.findOne({email:email});
+        const userData = await User.findOne({ email: email });
         if (userData) {
             if (userData.is_admin === 0) {
-                res.render('forget', {message: 'Данная почта некорректна'});
+                res.render('forget', { message: 'Данная почта некорректна' });
             } else {
                 const randomString = randomstring.generate();
-                const updatedData = awaitUser.updateOne({email:email}, {$set:{token_pass:randomString}});
+                const updatedData = awaitUser.updateOne({ email: email }, { $set: { token_pass: randomString } });
                 sendResetPasswordMail(userData.name, userData.email, randomString);
-                res.render('forget', {message: 'Письмо отправлено'});
+                res.render('forget', { message: 'Письмо отправлено' });
             }
         } else {
-            res.render('forget', {message: 'Данная почта некорректна'});
+            res.render('forget', { message: 'Данная почта некорректна' });
         }
 
     } catch (error) {
@@ -174,14 +174,14 @@ const forgetVerify = async(req, res) => {
     }
 };
 
-const forgetPasswordLoad = async(req, res) => {
+const forgetPasswordLoad = async (req, res) => {
     try {
         const token_pass = req.query.token_pass;
-        const tokenData = await User.findOne({token_pass:token_pass});
+        const tokenData = await User.findOne({ token_pass: token_pass });
         if (tokenData) {
-            res.render('forget-password', {user_id: tokenData._id});
+            res.render('forget-password', { user_id: tokenData._id });
         } else {
-            res.render('rotten_egg', {message: "Протухший токен"});
+            res.render('rotten_egg', { message: "Протухший токен" });
         }
 
     } catch (error) {
@@ -190,12 +190,12 @@ const forgetPasswordLoad = async(req, res) => {
 
 };
 
-const resetPassword = async(req, res) => {
+const resetPassword = async (req, res) => {
     try {
         const password = req.body.password;
         const user_id = req.body.user_id;
         const sPassword = await securePassword(password);
-        const updatedData = await User.findByIdAndUpdate({_id:user_id}, {$set:{password:sPassword, token_pass:''}});
+        const updatedData = await User.findByIdAndUpdate({ _id: user_id }, { $set: { password: sPassword, token_pass: '' } });
         res.render('password_success');
     } catch (error) {
         console.log(error.message);
@@ -203,17 +203,17 @@ const resetPassword = async(req, res) => {
 
 };
 
-const adminDashboard = async(req, res) => {
+const adminDashboard = async (req, res) => {
     try {
-        const usersData = await User.find({is_admin: 0});
-        res.render('dashboard', {users: usersData});
+        const usersData = await User.find({ is_admin: 0 });
+        res.render('dashboard', { users: usersData });
     } catch (error) {
         console.log(error.message);
     }
 
 };
 
-const newLecturerLoad = async(req, res) => {
+const newLecturerLoad = async (req, res) => {
     try {
         res.render('new-lecturer');
     } catch (error) {
@@ -222,7 +222,7 @@ const newLecturerLoad = async(req, res) => {
 
 };
 
-const addLecturer = async(req, res) => {
+const addLecturer = async (req, res) => {
     try {
         if (req.file == undefined) {
             var data_image = null;
@@ -252,18 +252,18 @@ const addLecturer = async(req, res) => {
         const userData = await user.save();
         if (userData) {
             sendNotification(name, email, password);
-            res.render('new-lecturer', {message: "Запись успешно занесена в базу"});
+            res.render('new-lecturer', { message: "Запись успешно занесена в базу" });
         } else {
-            res.render('new-lecturer', {message: "Что-то пошло не так!"});
+            res.render('new-lecturer', { message: "Что-то пошло не так!" });
         }
-        
+
     } catch (error) {
         console.log(error.message);
     }
 
 };
 
-const editLecturerLoad = async(req, res) => {
+const editLecturerLoad = async (req, res) => {
     try {
         const id = req.query.id;
         const userData = await User.findById({ _id: id });
@@ -278,7 +278,7 @@ const editLecturerLoad = async(req, res) => {
 
 };
 
-const updateUsers = async(req, res) => {
+const updateUsers = async (req, res) => {
     try {
         const userData = await User.findByIdAndUpdate({ _id: req.body.id }, { $set: { surname: req.body.surname, name: req.body.name, patronim: req.body.patronim, group_name: req.body.group_name } });
         res.render('edit-user', { user: userData, message: "Success" });
@@ -288,7 +288,7 @@ const updateUsers = async(req, res) => {
 
 };
 
-const deleteUsers = async(req, res) => {
+const deleteUsers = async (req, res) => {
     try {
         const id = req.query.id;
         await User.deleteOne({ _id: id });
@@ -298,23 +298,23 @@ const deleteUsers = async(req, res) => {
     }
 };
 
-const exportUsers = async(req, res) => {
+const exportUsers = async (req, res) => {
     try {
         const workbook = new excelJS.Workbook();
         const worksheet = workbook.addWorksheet("My Users");
         worksheet.columns = [
-            {header: "Номер", key: "s_no"},
-            {header: "Фамилия", key: "surname"},
-            {header: "Имя", key: "name"},
-            {header: "Отчество", key: "patronim"},
-            {header: "Группа", key: "group_name"},
-            {header: "Почта", key: "email"},
-            {header: "Администратор", key: "is_admin"},
-            {header: "Преподаватель", key: "is_lecturer"},
-            {header: "Подтверждён", key: "is_verified"}
+            { header: "Номер", key: "s_no" },
+            { header: "Фамилия", key: "surname" },
+            { header: "Имя", key: "name" },
+            { header: "Отчество", key: "patronim" },
+            { header: "Группа", key: "group_name" },
+            { header: "Почта", key: "email" },
+            { header: "Администратор", key: "is_admin" },
+            { header: "Преподаватель", key: "is_lecturer" },
+            { header: "Подтверждён", key: "is_verified" }
         ];
         let counter = 1;
-        const userData = await User.find({ is_admin: 0});
+        const userData = await User.find({ is_admin: 0 });
         userData.forEach((user) => {
             user.s_no = counter;
             worksheet.addRow(user);

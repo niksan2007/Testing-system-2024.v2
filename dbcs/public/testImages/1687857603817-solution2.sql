@@ -1,3 +1,0 @@
-select NAME from city
-where COUNTRYCODE = 'USA' AND
-POPULATION > 120000
