@@ -93,7 +93,6 @@ user_route.post('/constructor', uploadTest.fields([
     {name: 'image', maxCount: 10},
     {name: 'scriptTable', maxCount: 10},
     {name: 'scriptTableData', maxCount: 10}]), userController.sendCreatedTest);
-
 user_route.get('/test_status', lecturerAuth.isLogin, userController.showAllTests);
 
 user_route.get('/edit-test', lecturerAuth.isLogin, userController.editLecturerTest);
@@ -104,5 +103,26 @@ user_route.post('/edit-test', uploadTest.fields([
     {name: 'scriptTableData', maxCount: 10}]), userController.updateTests);
 
 user_route.get('/delete-test', userController.deleteTests);
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// Маршрут для отображения страницы создания обычного теста
+user_route.get('/ClassicConstructor', lecturerAuth.isLogin, userController.createClassicTest);
+
+
+user_route.get('/ChangeTest', lecturerAuth.isLogin, userController.createChange);
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 module.exports = user_route;

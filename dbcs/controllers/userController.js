@@ -15,6 +15,9 @@ const fs = require('fs');
 const oracledb = require('oracledb');
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
+
+
+
 const securePassword = async(password)=>{
     try {
         const passwordHash = await bcrypt.hash(password, 10);
@@ -23,6 +26,9 @@ const securePassword = async(password)=>{
         console.log(error.message);
     }
 };
+
+
+
 
 const sendVerifyMail = async(name, email, user_id)=> {
     try {
@@ -604,6 +610,28 @@ const createTest = async(req, res)=>{
         console.log(error.message);
     };
 };
+////////////////////////////////////////////////////
+
+
+
+const createChange = async(req, res)=>{
+    try {
+        res.render('ChangeTest');
+    } catch (error) {
+        console.log(error.message);
+    };
+};
+
+
+const createClassicTest = async(req, res)=>{
+    try {
+        res.render('ClassicConstructor');
+    } catch (error) {
+        console.log(error.message);
+    };
+};
+
+//////////////////////////////////////////////
 
 const sendCreatedTest = async(req, res)=>{
     try {
@@ -901,6 +929,7 @@ const updateTests = async(req, res) => {
     }
 };
 
+
 const deleteTests = async(req, res) => {
     try {
         const id = req.query.id;
@@ -957,7 +986,9 @@ const deleteTests = async(req, res) => {
     } catch (error) {
         console.log(error.message);
     }
+
 }
+
 
 module.exports = {
     loadRegister,
@@ -988,5 +1019,7 @@ module.exports = {
     editLecturerTest,
     updateTests,
     deleteTests,
-    studentAnswers
+    studentAnswers,
+    createClassicTest,
+    createChange
 };
