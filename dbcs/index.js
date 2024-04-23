@@ -5,7 +5,8 @@ https://github.com/ComradeWayne/Testing-system-2023
 //import resultRoute from "./simpleTest/routes/resultRoute";
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://niksan:123123123@timoshenkocluster.jujyl.mongodb.net/?retryWrites=true&w=majority&appName=TimoshenkoCluster");
+//Smongoose.connect("mongodb+srv://niksan:123123123@timoshenkocluster.jujyl.mongodb.net/?retryWrites=true&w=majority&appName=TimoshenkoCluster");
+mongoose.connect("mongodb+srv://niksan:123123123@timoshenkocluster.jujyl.mongodb.net/control_system?retryWrites=true&w=majority");
 
 const express = require("express");
 const app = express();

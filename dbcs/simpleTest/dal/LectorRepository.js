@@ -1,3 +1,8 @@
+const testModel = require('../../models/testModel')
+
+
+
+
 class LectorRepository{
 
     async createTest(test){
