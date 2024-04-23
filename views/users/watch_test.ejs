@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница тестов</title>
+    <link rel="stylesheet" href="/css_files/style_watch_test.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <h2>Сведения</h2>
+
+    <table width="35%">
+    <tr>
+        <th>Тема тестирования</th>
+        <th>Количество вопросов</th>
+        <th>Время тестирования</th>
+    </tr>
+
+    <%
+        if (tests.length > 0) {
+            for (let i = 0; i < tests.length; i++) {
+                %>
+                <tr>
+                    <td><%= tests[i].topic %></td>
+                    <td><%= tests[i].numberQues %></td>
+                    <td><%= tests[i].numberRemaining %> минут</td>
+                    <td>
+                        <%
+                            if (user.about_test.includes(tests[i]._id)) {
+                                %>
+                                    <a>Данный тест пройден</a>
+                                <%
+                            } else {
+                                %>
+                                    <a href="/pass-test?id=<%= tests[i]._id %>">Начать тестирование</a>
+                                <%
+                            }
+                        %>
+                    </td>
+                </tr>
+                <%
+            }
+        } else {
+            %>
+            <tr>
+                <td colspan="2" style="text-align:center;">Тестов не создано</td>
+            </tr>
+            <%
+        }
+    %>
+    </table>
+    <div class="register">
+        <a href="/home">Вернуться обратно</a>
+    </div>
+</body>
+</html>

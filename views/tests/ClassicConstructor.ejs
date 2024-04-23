@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор тестов</title>
+    <link rel="stylesheet" href="/css_files/style_construct.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        <section>
+            <div class="main">
+                <fieldset>
+                    <legend><span class="legend-title">Укажите количество вопросов</span></legend>
+                    <div class="counter">
+                        <span tooltip="Максимум: 10 вопросов" flow="down">
+                            <button id="minus_que_count" type="button">-</button>
+                            <input type="text" id='numscores_count' value='1' class="numscores" name="count_que" required>
+                            <button id="plus_que_count" type="button">+</button>
+                        </span>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="main">
+                <fieldset>
+                    <legend><span class="legend-title">Укажите длительность тестирования</span></legend>
+                    <div class="counter">
+                        <span tooltip="Максимум: 90 минут" flow="down">
+                            <button id="minus_day" type="button">-</button>
+                            <input type="text" id='dayscores' value='15' class="dayscores" name="test_remaining" required>
+                            <button id="plus_day" type="button">+</button>
+                        </span>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="main">
+                <fieldset>
+                    <legend><span class="legend-title">Напишите тему тестирования</span></legend>
+                    <div class="topicBody">
+                        <div class="topicbox">
+                            <input type="text" name="topic" id="topic" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+            <div id="questionTypeContainer" class="main">
+                <fieldset>
+                    <legend><span class="legend-title">Вопросы:</span></legend>
+                    <div id="questionsContainer">
+                        <!-- Сюда будут добавляться вопросы -->
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+    </form>
+
+    <script src="/css_files/addTaskClassic.js"></script>
+</body>
+
+</html>

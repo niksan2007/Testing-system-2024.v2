@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница | Студент</title>
+    <link rel="stylesheet" href="/css_files/style_home_student.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <h2>Главная страница</h2>
+    <%
+        if (user.image != null){
+            photo = user.image;
+        } else {
+            photo = "default.jpg"
+        }
+    %>
+
+    <input type="hidden" name="user_id" value="<%=user._id %>">
+    <div class="form-box">
+        <h3>Добро пожаловать, <%= user.name %></h3>
+        <table width="30%">
+            <tr>
+                <td><img src="userImages/<%= photo %>" width="150px" height="150px" alt="<%= photo %>"></td>
+            </tr>
+            <tr>
+                <td>Почта</td>
+                <td><%= user.email %></td>
+            </tr>
+            <tr>
+                <td>Учебная группа</td>
+                <td><%= user.group_name %></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="register">
+        <a href="/watch_test">Тестироваться</a>
+        <br>
+        <a href="/edit?id=<%= user._id %>">Редактировать</a>
+        <br>
+        <a href="/logout">Выйти</a>
+    </div>
+
+</body>
+</html>

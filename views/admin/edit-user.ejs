@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать профиль</title>
+    <link rel="stylesheet" href="/css_files/style_edit_student.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <%
+        if (typeof message !== 'undefined') {
+            %>
+                <h3><%= message %></h3>
+            <%
+        }
+    %>
+
+    <div class="form-box">
+        <form action="" method="POST">
+            <input type="text" name="surname" placeholder="Введите фамилию" value="<%= user.surname %>">
+            <br><br>
+            <input type="text" name="name" placeholder="Введите имя" value="<%= user.name %>">
+            <br><br>
+            <input type="text" name="patronim" placeholder="Введите отчество" value="<%= user.patronim %>">
+            <br><br>
+            <input type="text" name="group_name" placeholder="ГРУ-516" value="<%= user.group_name %>">
+            <br><br>
+            <input type="hidden" name="id" value="<%= user.id %>">
+            <input type="submit" value="Изменить">
+        </form>
+    </div>
+
+    <div class="register">
+        <a href="/admin/dashboard">Вернуться обратно</a>
+    </div>
+
+</body>
+</html>

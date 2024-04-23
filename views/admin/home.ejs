@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница | Администратор</title>
+    <link rel="stylesheet" href="/css_files/style_home_student.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <h1>Добро пожаловать, <%= admin.name %></h1>
+    <%
+        if (admin.image != null){
+            photo = admin.image;
+        } else {
+            photo = "default.jpg"
+        }
+    %>
+    <div class="register">
+        <a href="/admin/dashboard">Сведения</a>
+    </div>
+    <div class="form-box">
+        <table style="width: 30%;">
+            <tr>
+                <td><img src="userImages/<%= photo %>" width="150px" height="150px" alt="<%= photo %>"></td>
+            </tr>
+            <tr>
+                <td>Почта</td>
+                <td><%= admin.email %></td>
+            </tr>
+        
+        </table>
+    </div>
+
+    <div class="register">
+        <a href="/admin/logout">Выйти</a>
+    </div>
+
+</body>
+</html>
