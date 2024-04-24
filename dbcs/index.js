@@ -2,7 +2,7 @@
 Исходники на Github
 https://github.com/ComradeWayne/Testing-system-2023
 */
-//import resultRoute from "./simpleTest/routes/resultRoute";
+
 
 const mongoose = require("mongoose");
 //Smongoose.connect("mongodb+srv://niksan:123123123@timoshenkocluster.jujyl.mongodb.net/?retryWrites=true&w=majority&appName=TimoshenkoCluster");
@@ -17,13 +17,13 @@ app.use('/', userRoute);
 const adminRoute = require('./routes/adminRoute');
 app.use('/admin', adminRoute);
 
-const resultRoute = require('./simpleTest/routes/resultRoute');
+const resultRoute = require('./simpleTest/transport/resultRoute');
 app.use('/results',resultRoute);
 
-const lectorRoute = require('./simpleTest/routes/lectorRoute');
+const lectorRoute = require('./simpleTest/transport/lectorRoute');
 app.use('/lector',lectorRoute);
 
-const studentRoute = require('./simpleTest/routes/studentRoute');
+const studentRoute = require('./simpleTest/transport/studentRoute');
 app.use('/student',studentRoute);
 
 app.listen(3000, function(){

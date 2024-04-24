@@ -3,7 +3,7 @@ const isLogin = async(req,res,next)=>{
         if (req.session.token_lecturer) {
 
         } else {
-            res.redirect('/');
+            res.redirect('/home');
         }
         next();
     } catch (error) {

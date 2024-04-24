@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-//TODO:: Добавить поле createdTest для хранения созданных тестов
+
 const userSchema = new mongoose.Schema({
 
     surname: {

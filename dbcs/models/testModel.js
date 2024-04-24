@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//TODO::Добавить поле Groups для хранения групп, которые должны пройти тест
+
 const testSchema = new mongoose.Schema({
 
     numberQues:{
