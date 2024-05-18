@@ -1,11 +1,11 @@
 const testRepository = require('./testRepository')
-const userRepository = requirt('./userRepository')
+const userRepository = require('./userRepository')
 
 class Repository{
     
     constructor(test, user){
-        TestRepo = test
-        UserRepo = user
+        this.TestRepo = test
+        this.UserRepo = user
     }
 }
 

@@ -1,11 +1,12 @@
-const userCont = require('./userController')
-const testCont = require('./testController')
+const userController = require('./userController')
+const testController = require('./testController')
+const testService = require('../use_case/service')
 
 class Controllers{
-    constructor(user, test){
-        UserController = user
-        TestController = test
+    constructor(service){
+        this.UserCont = new userController(service)
+        this.TestCont = new testController(service)
     }
 }
 
-module.exports = new Controllers(userCont, testCont)
+module.exports = new Controllers(testService)

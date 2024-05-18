@@ -1,4 +1,4 @@
-const userModel = require('./models/userModel')
+const userModel = require('../../models/userModel')
 
 class UserRepository{
 
@@ -12,4 +12,4 @@ class UserRepository{
     } 
 }
 
-module.exports = UserRepository()
+module.exports = new UserRepository()

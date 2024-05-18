@@ -9,8 +9,8 @@ resultRoute = new r.Router();
 const controllers = require('../controllers/controllers');
 
 
-resultRoute.get("/result/:userId", userAuth, expressCallback(controllers.TestController));
-resultRoute.get("/result", lecturerAuth, expressCallback(controllers.TestController))
+resultRoute.get("/result/:userId", userAuth, expressCallback(controllers.TestCont));
+resultRoute.get("/result", lecturerAuth, expressCallback(controllers.TestCont))
 
 
 module.exports = resultRoute;

@@ -20,10 +20,8 @@ app.use('/admin', adminRoute);
 const resultRoute = require('./simpleTest/transport/resultRoute');
 app.use('/results',resultRoute);
 
-const lectorRoute = require('./simpleTest/transport/lectorRoute');
+const { lectorRoute, studentRoute } = require('./simpleTest/transport/userRoute')
 app.use('/lector',lectorRoute);
-
-const studentRoute = require('./simpleTest/transport/studentRoute');
 app.use('/student',studentRoute);
 
 app.listen(3000, function(){

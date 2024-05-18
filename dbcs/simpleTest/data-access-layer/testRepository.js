@@ -1,5 +1,5 @@
-const repStud = require('./models/replyStudModel')
-const test = require('./models/testModel')
+const repStud = require('../../models/replyStudModel')
+const test = require('../../models/testModel')
 
 
 class TestRepository{
