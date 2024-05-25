@@ -1,88 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-* {
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ecf0f3; /* Фоновый цвет */
+    font-size: 1.6rem;
+    color: #2b3e51; /* Основной цвет текста */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-body {
-    background-color: lightseagreen;
-    font-size: 1.6rem;
-    font-family: "Open Sans", sans-serif;
-    color: #2b3e51;
-}
-  
-h3 {
-    font-weight: 300;
+.container {
     text-align: center;
 }
-  
-.btn {
-    display: inline-block; /* Строчно-блочный элемент */
-    background: #3ca9e2; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
-    width: 50%;
-}
-  
-  
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-  
-table{
-    margin: 50px auto;
-    width: 640px;
-}
-  
-td{
-    background-color: #fff;
-    width: 35%;
-    margin: 30px auto;
-    text-align: center;
-    padding: 20px 0 0 0;
-    border-radius: 4px;
-    box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
-}
-  
-.validation {
-    display: none;
-    position: absolute;
-    content: " ";
-    height: 60px;
-    width: 30px;
-    right: 15px;
-    top: 0px;
-}
-  
+
 .form-box {
-    background-color: #fff;
+    width: 80%;
+    max-width: 600px; /* Максимальная ширина блока */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Белый фон */
+    margin: 50px auto; /* Отступы сверху и снизу, автоматическое позиционирование по горизонтали */
+}
+
+.btn {
+    background: #007bff; /* Синий цвет фона */
+    color: #ffffff; /* Белый цвет текста */
+    padding: 12px 24px; /* Поля вокруг текста */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s; /* Плавное изменение цвета при наведении */
+    text-decoration: none; 
+    display: block; /* Сделаем кнопки блочными элементами */
+    margin: 10px auto; /* Выравнивание по центру */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+img {
     width: 50%;
-    margin: 30px auto;
-    text-align: center;
-    padding: 10px 0 5px 0;
-    border-radius: 4px;
-    box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
-}
-
-.register {
-    font-size: 1em;
-    color: black;
-    text-align: center;
-    margin: 25px 0 10px;
-}
-
-.register a {
-    text-decoration: none;
-    color: black;
-    font-weight: 600;
-}
-
-.register a:hover {
-    text-decoration: underline;
+    height: auto; 
+    display: block; /* Сделаем изображение блочным элементом */
+    margin: 0 auto 20px; /* Выравнивание по центру снизу */
 }

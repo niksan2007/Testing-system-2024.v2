@@ -116,10 +116,10 @@ user_route.get('/ClassicConstructor', lecturerAuth.isLogin, userController.creat
 user_route.get('/ChangeTest', lecturerAuth.isLogin, userController.createChange);
 
 
+//Маршрут для результатов тестирование 
+user_route.get('/Results', lecturerAuth.isLogin, userController.renderResultsPage)
 
-
-
-
+user_route.get('/students/:testTopic', userController.getStudentsByTestTopic);
 ///////////////////////////////////////////////////////////////////////////////////
 
 

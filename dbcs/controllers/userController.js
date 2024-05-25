@@ -5,7 +5,7 @@ https://github.com/ComradeWayne/Testing-system-2023
 
 const User = require('../models/userModel');
 const Test = require('../models/testModel');
-const replyStud = require('../models/replyStudModel');
+const ReplyStud = require('../models/replyStudModel');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const randomstring = require('randomstring');
@@ -16,6 +16,94 @@ const oracledb = require('oracledb');
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
 
+////////////////////////////////////////////////////
+
+//То что было добавлено мной
+
+
+const createChange = async(req, res)=>{
+    try {
+        res.render('ChangeTest');
+    } catch (error) {
+        console.log(error.message);
+    };
+};
+
+
+const createClassicTest = async(req, res)=>{
+    try {
+        res.render('ClassicConstructor');
+    } catch (error) {
+        console.log(error.message);
+    };
+};
+const renderResultsPage = async (req, res) => {
+    try {
+        const lecturerId = req.session.token_lecturer;
+
+        if (!lecturerId) {
+            return res.status(403).send('Доступ запрещен');
+        }
+
+        const replies = await ReplyStud.find({ lector_id: lecturerId });
+        const uniqueTestTopics = Array.from(new Set(replies.map(reply => reply.info_test[0]?.test_topic)))
+            .filter(topic => topic !== null);
+
+        res.render('Results', { testTopics: uniqueTestTopics });
+    } catch (error) {
+        console.error('Ошибка при рендеринге страницы результатов:', error);
+        res.status(500).send('Внутренняя ошибка сервера');
+    }
+};
+
+
+
+// Получить учеников, прошедших тест по определенной теме
+const getStudentsByTestTopic = async (req, res) => {
+    try {
+        const { testTopic } = req.params;
+
+        // Найти всех учеников, прошедших тест по указанной теме
+        const students = await ReplyStud.aggregate([
+            { $match: { "info_test.test_topic": testTopic } },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "stud_id",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            { $unwind: "$user" },
+            {
+                $project: {
+                    _id: "$stud_id",
+                    name: "$user.name",
+                    surname: "$user.surname",
+                    group: "$user.group_name",
+                    correctAnswers: { $arrayElemAt: ["$quantity.correct_ans", 0] },
+                    totalQuestions: { $add: [{ $arrayElemAt: ["$quantity.correct_ans", 0] }, { $arrayElemAt: ["$quantity.incorrect_ans", 0] }] },
+                    percentage: {
+                        $multiply: [
+                            { $divide: [{ $arrayElemAt: ["$quantity.correct_ans", 0] }, { $add: [{ $arrayElemAt: ["$quantity.correct_ans", 0] }, { $arrayElemAt: ["$quantity.incorrect_ans", 0] }] }] },
+                            100
+                        ]
+                    }
+                }
+            }
+        ]);
+
+        // Отправить данные об учениках в ответе
+        res.render('studentsByTestTopic', { students: students, testTopic: testTopic });
+    } catch (error) {
+        console.error('Ошибка при получении данных об учениках:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+};
+
+
+
+//////////////////////////////////////////////
 
 
 const securePassword = async(password)=>{
@@ -200,17 +288,17 @@ const briefLoad = async(req, res)=>{
     }
 };
 
-const verifyLogin = async(req,res)=> {
+const verifyLogin = async(req, res) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
-        const userData = await User.findOne({email:email});
+        const userData = await User.findOne({ email: email });
         console.log("req.body", req.body);
         if (userData) {
             const passwordMatch = await bcrypt.compare(password, userData.password);
             if (passwordMatch) {
                 if (userData.is_verified === 0) {
-                    res.render('login', {message: "Пожалуйста подтвердите почту"});
+                    res.render('login', { message: "Пожалуйста подтвердите почту" });
                 } else if (userData.is_verified === 1 && userData.is_lecturer === 0 && userData.is_admin === 0) {
                     req.session.token_user = userData._id;
                     console.log(`Студент ${userData.surname} ${userData.name} ${userData.group_name} начал сессию в сервисе`);
@@ -222,16 +310,17 @@ const verifyLogin = async(req,res)=> {
                     console.log(`Его токен req.session.token_lecturer = ${req.session.token_lecturer}`);
                     res.redirect('/home_lecturer');
                 } else {
-                    res.render('login', {message: "Некорректный пароль"});
+                    res.render('login', { message: "Некорректный пароль" });
                 }
             } else {
-                res.render('login', {message: "Некорректный пароль"});
+                res.render('login', { message: "Некорректный пароль" });
             }
         } else {
-            res.render('login', {message: "Такой учётной записи не существует в базе"});
+            res.render('login', { message: "Такой учётной записи не существует в базе" });
         }
     } catch (error) {
         console.log(error.message);
+        res.status(500).send("Внутренняя ошибка сервера");
     }
 };
 
@@ -610,28 +699,7 @@ const createTest = async(req, res)=>{
         console.log(error.message);
     };
 };
-////////////////////////////////////////////////////
 
-
-
-const createChange = async(req, res)=>{
-    try {
-        res.render('ChangeTest');
-    } catch (error) {
-        console.log(error.message);
-    };
-};
-
-
-const createClassicTest = async(req, res)=>{
-    try {
-        res.render('ClassicConstructor');
-    } catch (error) {
-        console.log(error.message);
-    };
-};
-
-//////////////////////////////////////////////
 
 const sendCreatedTest = async(req, res)=>{
     try {
@@ -1021,5 +1089,7 @@ module.exports = {
     deleteTests,
     studentAnswers,
     createClassicTest,
-    createChange
+    createChange,
+    renderResultsPage,
+    getStudentsByTestTopic
 };

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты тестирования</title>
+    <link rel="stylesheet" href="/css_files/style_Results.css"> <!-- Подключаем CSS файл -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Подключаем иконки Boxicons -->
+</head>
+<body>
+    <div class="container">
+        <h1>Результаты тестирования</h1>
+        
+        <!-- Выводим список доступных тем тестов -->
+        <div class="topics-container">
+            <ul id="testTopicsList">
+                <% if (testTopics.length > 0) { %>
+                    <% testTopics.forEach(topic => { %>
+                        <li class="topic-item">
+                            <span><%= topic %></span>
+                            <!-- Иконка как кнопка -->
+                            <a href="/students/<%= encodeURIComponent(topic) %>" class="btn">
+                                <img src="/css_files/Enter.png" alt="Enter icon">
+                            </a>
+                        </li>
+                    <% }) %>
+                <% } else { %>
+                    <li>Нет доступных тем тестов</li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
