@@ -1,16 +1,15 @@
 const r = require('express');
 const userAuth = require("../middleware/userAuth");
 const lecturerAuth = require('../middleware/lecturerAuth')
-const expressCallback = require('../middleware/expressCallback')
+const controllers = require('../controllers/controllers')
 
 
 resultRoute = new r.Router();
 
-const controllers = require('../controllers/controllers');
+resultRoute.get("/result/:testTopic", lecturerAuth, controllers.ResultController.getResultsByTestTopic);
+resultRoute.get("/result", lecturerAuth, controllers.ResultController.getResults);
+resultRoute.get("/result/:id", lecturerAuth, controllers.ResultController.getResultById); 
 
-
-resultRoute.get("/result/:userId", userAuth, expressCallback(controllers.TestCont));
-resultRoute.get("/result", lecturerAuth, expressCallback(controllers.TestCont))
 
 
 module.exports = resultRoute;

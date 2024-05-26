@@ -1,10 +1,7 @@
-const userTestClass = require('../entity/user-test')
-
 module.exports = function makeGetResult(db){
-    return async function getResult(resultInfo){
-        const res = userTestClass(resultInfo)
+    return async function getResult(id){
         try{
-            return db.getTestById(res.stud_id)
+            return db.getUserResult(id)
             
         } catch (e){
             throw e

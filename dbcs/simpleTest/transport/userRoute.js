@@ -4,27 +4,33 @@ const lecturerAuth = require('../middleware/lecturerAuth')
 const controllers = require('../controllers/controllers')
 
 
+
+
 studentRoute = new r.Router();
 
 
-studentRoute.get("/tests",userAuth, controllers.UserCont.getTests);
+studentRoute.get("/tests",userAuth, controllers.TestContoller.getTests);
 
-studentRoute.get("/test/:id",userAuth, controllers.UserCont.getTestById);
+studentRoute.get("/test/:id",userAuth, controllers.TestContoller.getTestById);
 
-studentRoute.post("/test",userAuth, controllers.UserCont.saveTest);
+studentRoute.post("/test",userAuth, controllers.ResultController.createResult);
 
 
 lectorRoute = new r.Router();
 
-lectorRoute.post("/newTest",lecturerAuth, controllers.UserCont.createTest);
+lectorRoute.get("/test",lecturerAuth, controllers.TestContoller.renderCreateTest);
 
-lectorRoute.put('/test/:id',lecturerAuth, controllers.UserCont.updateTest)
+lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.createClassicTest)
 
-lectorRoute.delete('/test/:id',lecturerAuth, controllers.UserCont.deleteTest)
+lectorRoute.put('/test/:id',lecturerAuth, controllers.TestContoller.updateTest)
 
-lectorRoute.get('/tests',lecturerAuth, controllers.UserCont.getTests)
+lectorRoute.delete('/test/:id',lecturerAuth, controllers.TestContoller.deleteTest)
 
-lectorRoute.get('/test/:id',lecturerAuth, controllers.UserCont.getTestById)
+lectorRoute.get('/tests',lecturerAuth, controllers.TestContoller.getTests)
+
+
+
+
 
 
 

@@ -1,8 +1,5 @@
-const testClass = require('../entity/test')
-
 module.exports = function makeEditTest(db){
-    return async function editTest(testInfo){
-        const test = testClass(testInfo)
+    return async function editTest(test){
         try{
             return db.updateTest(test)
             

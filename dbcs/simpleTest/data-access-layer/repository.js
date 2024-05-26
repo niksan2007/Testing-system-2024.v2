@@ -1,12 +1,12 @@
-const testRepository = require('./testRepository')
-const userRepository = require('./userRepository')
+const testRepo = require('./testRepository')
+const resultRepo = require('./resultRepository')
 
 class Repository{
     
-    constructor(test, user){
-        this.TestRepo = test
-        this.UserRepo = user
+    constructor(test, result){
+        this.TestRepository = test;
+        this.ResultRepository = result;
     }
 }
 
-module.exports = new Repository(testRepository, userRepository)
+module.exports = new Repository(testRepo, resultRepo)

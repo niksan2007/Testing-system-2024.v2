@@ -10,6 +10,9 @@ mongoose.connect("mongodb+srv://niksan:123123123@timoshenkocluster.jujyl.mongodb
 const express = require("express");
 const app = express();
 
+
+app.set('view engine', 'ejs');
+
 const userRoute = require('./routes/userRoute');
 app.use('/', userRoute);
 

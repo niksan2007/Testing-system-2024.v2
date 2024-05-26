@@ -1,5 +1,6 @@
 class UserTest{
     stud_id
+    lector_id
     info_test
     query_answers
     quantity
