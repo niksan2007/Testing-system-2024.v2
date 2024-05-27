@@ -8,7 +8,7 @@ resultRoute = new r.Router();
 
 resultRoute.get("/result/:testTopic", lecturerAuth, controllers.ResultController.getResultsByTestTopic);
 resultRoute.get("/result", lecturerAuth, controllers.ResultController.getResults);
-resultRoute.get("/result/:id", lecturerAuth, controllers.ResultController.getResultById); 
+//resultRoute.get("/result/:id", lecturerAuth, controllers.ResultController.getResultById); 
 
 
 

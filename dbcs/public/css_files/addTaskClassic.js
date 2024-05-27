@@ -29,7 +29,7 @@ function showQuestionFields(questionContainer) {
             <div class="input">
             <br>
                 <label for="questionText">Постановка задачи:</label>
-                <textarea style="overflow:auto;resize:none" name="preview1" rows="5" cols="45"></textarea><br><br>
+                <textarea style="overflow:auto;resize:none" name="questionText" rows="5" cols="45"></textarea><br><br>
             </div>
             <div class="answerOptions">
                 <div class="input">
@@ -47,14 +47,14 @@ function showQuestionFields(questionContainer) {
             <div class="input">
             <br>
                 <label for="questionText">Постановка задачи:</label>
-                <textarea style="overflow:auto;resize:none" name="preview1" rows="5" cols="45"></textarea><br><br>
+                <textarea style="overflow:auto;resize:none" name="questionText" rows="5" cols="45"></textarea><br><br>
             </div>
         
             <div class="input">
                 <label for="openEndedQuestion">Вариант ответа:</label>
                 <textarea name="openEndedQuestion"></textarea>
                 <br>
-                <label for="openEndedQuestion">Правильный ответ:</label>
+                <label for="openEndedAnswer">Правильный ответ:</label>
                 <textarea name="openEndedAnswer"></textarea>
             </div>
         `;

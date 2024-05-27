@@ -14,6 +14,13 @@
             "request": "launch",
             "command": "node index.js",
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Run Script: test",
+            "request": "launch",
+            "command": "node index.js",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }

@@ -10,6 +10,13 @@ class Test{
     scriptTableData
     image
     token_test
+    
+    //Тип теста
+    type
+    //Варианты ответа в виде коллекции с 2 полями aswer и isCorrect верный ли это ответ
+    answerOptions
+    //В сам конструктор доваить не успел
+ 
 
     constructor(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image, token_test){
         this._id = _id
