@@ -42,17 +42,24 @@ class TestController {
         }
     }
 
-    async createClassicTest(req, res) {
+    async renderClassicConstructor(req, res) {
         try {
             res.render('../views/tests/ClassicConstructor');
             //res.render("../views/tests/ClassicConstructor.ejs")
-            // const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test } = req.body;
-            // const newTest = new Test(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test);
-            // const createdTest = await testService.addTest(newTest);
-            // return createdTest;
+            
         } catch (error) {
             throw error;
         }
+    }
+
+    async createClassicTest(req, res){
+        try{
+            const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test } = req.body;
+            const newTest = new Test(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test);
+            const createdTest = await testService.addTest(newTest);
+            return createdTest;
+        }
+        catch(e){}
     }
 
     async updateTest(req, res) {

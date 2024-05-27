@@ -8,11 +8,9 @@ class ResultController{
     async getResults(req, res) {
         try {
             const lecturerId = req.session.token_lecturer;
-    
             if (!lecturerId) {
                 return res.status(403).send('Доступ запрещен');
             }
-    
             const replies = await testService.listResult(lecturerId);
             const uniqueTestTopics = Array.from(new Set(replies.map(reply => reply.info_test[0]?.test_topic)))
                 .filter(topic => topic !== null);
@@ -25,13 +23,13 @@ class ResultController{
     }
 
 
-    async getResultById(req, res) {
+    async getResultByUserId(req, res) {
         try {
-            const id = req.session.token_user;
-            if(!id){
+            const userId = req.session.token_user;
+            if(!userId){
                 return res.status(403).send('Доступ запрещен');
             }
-            const result = await testService.getResult(id);
+            const result = await testService.getResult(userId);
             if (result) {
                 return result;
             } else {

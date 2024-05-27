@@ -18,9 +18,11 @@ studentRoute.post("/test",userAuth, controllers.ResultController.createResult);
 
 lectorRoute = new r.Router();
 
-lectorRoute.get("/test",lecturerAuth, controllers.TestContoller.renderCreateTest);
+lectorRoute.get("/test",lecturerAuth, controllers.TestContoller.renderCreateTest);// +
 
-lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.createClassicTest)
+lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.renderClassicConstructor)//+
+
+lectorRoute.post('/test', lecturerAuth, controllers.TestContoller.createClassicTest)//+
 
 lectorRoute.put('/test/:id',lecturerAuth, controllers.TestContoller.updateTest)
 
