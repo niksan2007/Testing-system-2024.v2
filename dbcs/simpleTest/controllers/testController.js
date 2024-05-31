@@ -45,21 +45,25 @@ class TestController {
     async renderClassicConstructor(req, res) {
         try {
             res.render('../views/tests/ClassicConstructor');
-            //res.render("../views/tests/ClassicConstructor.ejs")
             
         } catch (error) {
-            throw error;
+            res.status(500).send('Внутренняя ошибка сервера');
         }
     }
 
     async createClassicTest(req, res){
         try{
-            const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test } = req.body;
-            const newTest = new Test(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test);
-            const createdTest = await testService.addTest(newTest);
-            return createdTest;
+            //console.log(req.body)
+            const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
+            const newTest = new Test(_id, 2, 3, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image , token_test, []);
+            await testService.addTest(newTest);
+            res.render('../views/tests/ChangeTest');
         }
-        catch(e){}
+        catch(e){
+            console.log(e);
+            res.status(500).send('Внутренняя ошибка сервера');
+
+        }
     }
 
     async updateTest(req, res) {
@@ -70,12 +74,11 @@ class TestController {
             if (result) {
                 return result;
             } else {
-                const error = new Error('Test not found');
-                error.status = 404;
-                throw error;
+                res.status(404).send('Test not found');
             }
         } catch (error) {
-            throw error;
+            console.log(e);
+            res.status(500).send('Внутренняя ошибка сервера');
         }
     }
 
@@ -90,7 +93,8 @@ class TestController {
                 throw error;
             }
         } catch (error) {
-            throw error;
+            console.log(e);
+            res.status(500).send('Внутренняя ошибка сервера');
         }
     }
 }

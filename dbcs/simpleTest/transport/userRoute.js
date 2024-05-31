@@ -20,19 +20,16 @@ lectorRoute = new r.Router();
 
 lectorRoute.get("/test",lecturerAuth, controllers.TestContoller.renderCreateTest);
 
-lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.createClassicTest)
+lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.renderClassicConstructor);
+
+lectorRoute.post('/test', controllers.TestContoller.createClassicTest);
 
 
-// lectorRoute.put('/test/:id',lecturerAuth, controllers.TestContoller.updateTest)
+lectorRoute.put('/test/:id',lecturerAuth, controllers.TestContoller.updateTest)
 
-// lectorRoute.delete('/test/:id',lecturerAuth, controllers.TestContoller.deleteTest)
+lectorRoute.delete('/test/:id',lecturerAuth, controllers.TestContoller.deleteTest)
 
-// lectorRoute.get('/tests',lecturerAuth, controllers.TestContoller.getTests)
-
-
-
-
-
+lectorRoute.get('/tests',lecturerAuth, controllers.TestContoller.getTests)
 
 
 module.exports = {lectorRoute, studentRoute}
