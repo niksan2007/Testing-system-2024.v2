@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const testSchema = new mongoose.Schema({
 
     numberQues:{
@@ -57,6 +56,28 @@ const testSchema = new mongoose.Schema({
     token_test:{
         type:String,
         //require:true
+        default: null
+    },
+    answerOptions:{
+        type: [{
+            questionType: {
+                type: String,
+                enum: ['single', 'multiple', 'open'],
+                required: true
+            },
+            options: {
+                type: [String],
+                required: function() { return this.questionType !== 'open'; }  // Обязательно для вопросов с вариантами
+            },
+            correctAnswers: {
+                type: [String],
+                required: function() { return this.questionType !== 'open'; }  // Обязательно для вопросов с вариантами
+            },
+            openAnswer: {
+                type: String,
+                required: function() { return this.questionType === 'open'; }  // Обязательно для развернутых ответов
+            }
+        }],
         default: null
     }
 

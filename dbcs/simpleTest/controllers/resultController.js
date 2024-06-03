@@ -23,44 +23,44 @@ class ResultController{
     }
 
 
-    async getResultByUserId(req, res) {
+    async getResultBy(req, res) {
         try {
-            const userId = req.session.token_user;
-            if(!userId){
-                return res.status(403).send('Доступ запрещен');
-            }
-            const result = await testService.getResult(userId);
-            if (result) {
-                return result;
+            const { testTopic, id } = req.params;
+            
+            if (testTopic) {
+                // Если передан параметр testTopic, вызовем метод для получения результатов по теме теста
+                const students = await testService.getResultByTopic(testTopic);
+                return res.render('../views/users/studentsByTestTopic', { students: students, testTopic: testTopic });
+            } else if (id) {
+                // Если передан параметр id, вызовем метод для получения результатов по ID пользователя
+                const userId = req.session.token_user;
+                if (!userId) {
+                    return res.status(403).send('Доступ запрещен');
+                }
+                const result = await testService.getResult(userId);
+                if (result) {
+                    return res.json(result);
+                } else {
+                    const error = new Error('Result not found');
+                    error.status = 404;
+                    throw error;
+                }
             } else {
-                const error = new Error('Result not found');
-                error.status = 404;
-                throw error;
+                // Если ни один из параметров не передан, вернем ошибку
+                return res.status(400).json({ error: 'Bad Request: Missing required parameters' });
             }
         } catch (e) {
-            throw e;
+            console.error('Ошибка при получении данных:', e);
+            return res.status(500).json({ error: 'Ошибка сервера' });
         }
-    }
-    
-    async getResultsByTestTopic(req, res){
-        try{
-            const { testTopic } = req.params;
-            const students = await testService.getResultByTopic(testTopic)
-            res.render('../views/users/studentsByTestTopic', { students: students, testTopic: testTopic });
-        }
-        catch (e){
-            console.error('Ошибка при получении данных об учениках:', e);
-            res.status(500).json({ error: 'Ошибка сервера' });
-        }
-        
     }
     
 
     async createResult(req, res){
         try {
-            const { stud_id, info_test, query_answers, quantity, temp_queries } = req.body;
-            const newUserTest = new UserTest(stud_id, info_test, query_answers, quantity, temp_queries);
-            const result = await testService.createResult(newUserTest);
+            const { stud_id,lector_id, info_test, query_answers, quantity, temp_queries } = req.body;
+            const newUserTest = new UserTest(stud_id,lector_id, info_test, query_answers, quantity, temp_queries);
+            const result = await testService.addResult(newUserTest);
             return result;
         } catch (e) {
             throw e;

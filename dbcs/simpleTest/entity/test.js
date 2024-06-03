@@ -10,15 +10,11 @@ class Test{
     scriptTableData
     image
     token_test
-    
-    //Тип теста
-    type
-    //Варианты ответа в виде коллекции с 2 полями aswer и isCorrect верный ли это ответ
     answerOptions
-    //В сам конструктор доваить не успел
+
  
 
-    constructor(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image, token_test){
+    constructor(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image, token_test, answerOptions){
         this._id = _id
         this.numberQues = numberQues
         this.numberRemaining = numberRemaining
@@ -30,6 +26,7 @@ class Test{
         this.scriptTableData = scriptTableData
         this.image = image
         this.token_test = token_test
+        this.answerOptions = answerOptions
     }
 
 }
