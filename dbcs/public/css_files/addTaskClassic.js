@@ -40,7 +40,7 @@ function showQuestionFields(questionContainer) {
                     <button type="button" onclick="removeAnswerOption(this)">Удалить</button>
                 </div>
             </div>
-            <button type="button" onclick="addAnswerOption(this)">Добавить вариант ответа</button>
+            <button type="button" class="add-answer-option-button" onclick="addAnswerOption(this)">Добавить вариант ответа</button>
         `;
     } else if (questionType === 'openEnded') {
         questionContent.innerHTML = `

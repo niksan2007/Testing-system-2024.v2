@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,26 +8,28 @@
     <link rel="stylesheet" href="/css_files/style_home_student.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
 <body>
     <div class="container">
-        <div class="form-box">
+        <div class="sidebar">
+            <ul class="menu">
+                <li><a href="/test_status"><i class='bx bx-list-ul'></i> Просмотреть все тесты</a></li>
+                <li><a href="/lector/test"><i class='bx bx-edit-alt'></i> Создать тест</a></li>
+                <li><a href="/results/result"><i class='bx bx-bar-chart'></i> Результаты</a></li>
+                <li><a href="/logout_lec"><i class='bx bx-log-out'></i> Выйти</a></li>
+            </ul>
+        </div>
+        <div class="content">
             <h2>Преподаватель</h2>
+            <h3>Добро пожаловать, <%= user.name %></h3>
             <% if (user.image != null){ %>
                 <% photo = user.image; %>
             <% } else { %>
                 <% photo = "default.jpg"; %>
             <% } %>
-            <img src="userImages/<%= photo %>" width="150" height="150" alt="<%= user.image %>">
-            <h3>Добро пожаловать, <%= user.name %></h3>
+            <img src="userImages/<%= photo %>" width="150" height="150" alt="<%= user.image %>"
             <p>Почта: <%= user.email %></p>
             <a href="/edit_lecturer?id=<%= user._id %>" class="btn">Редактировать</a>
-            <a href="/test_status" class="btn">Просмотреть все тесты</a>
-            <a href="/lector/test" class="btn">Создать тест</a>
-            <a href="/results/result" class="btn">Результаты</a>
-            <a href="/logout_lec" class="btn">Выйти</a>
         </div>
     </div>
 </body>
-
 </html>

@@ -20,7 +20,7 @@ lectorRoute = new r.Router();
 
 lectorRoute.get("/test",lecturerAuth, controllers.TestContoller.renderCreateTest);
 
-lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.createClassicTest)
+lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.renderClassicConstructor)
 
 
 // lectorRoute.put('/test/:id',lecturerAuth, controllers.TestContoller.updateTest)

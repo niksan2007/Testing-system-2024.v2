@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #ecf0f3; /* Фоновый цвет */
+    background-color: #ecf0f3;
     font-size: 1.6rem;
-    color: #2b3e51; /* Основной цвет текста */
+    color: #2b3e51;
     margin: 0;
     padding: 0;
     display: flex;
@@ -14,40 +15,96 @@ body {
 }
 
 .container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    flex: 1 0 300px; /* Увеличиваем минимальную ширину блока */
+    background-color: #2b3e51;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu li {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.6rem;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    width: calc(100% - 40px); /* Оставить место для отступов */
+    margin: 0 auto; /* Центрируем элементы */
+}
+
+.menu a i {
+    margin-right: 10px;
+    font-size: 1.8rem;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    background-color: #007bff;
+    width: calc(100% - 40px); /* Поддерживаем ширину при наведении */
+}
+
+.menu a:hover i {
+    color: #ffffff;
+}
+
+.content {
+    flex: 3;
+    padding: 20px;
     text-align: center;
 }
 
-.form-box {
-    width: 80%;
-    max-width: 600px; /* Максимальная ширина блока */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff; /* Белый фон */
-    margin: 50px auto; /* Отступы сверху и снизу, автоматическое позиционирование по горизонтали */
+.content h2 {
+    margin-bottom: 20px;
 }
 
 .btn {
-    background: #007bff; /* Синий цвет фона */
-    color: #ffffff; /* Белый цвет текста */
-    padding: 12px 24px; /* Поля вокруг текста */
+    background: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s; /* Плавное изменение цвета при наведении */
-    text-decoration: none; 
-    display: block; /* Сделаем кнопки блочными элементами */
-    margin: 10px auto; /* Выравнивание по центру */
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: block;
+    margin: 10px auto;
 }
 
 .btn:hover {
-    background-color: #0056b3; /* Цвет кнопки при наведении */
+    background-color: #0056b3;
 }
 
 img {
     width: 50%;
-    height: auto; 
-    display: block; /* Сделаем изображение блочным элементом */
-    margin: 0 auto 20px; /* Выравнивание по центру снизу */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
 }
