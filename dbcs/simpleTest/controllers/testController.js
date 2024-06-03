@@ -32,11 +32,6 @@ class TestController {
     async renderCreateTest(req, res) {
         try {
             res.render('../views/tests/ChangeTest');
-            //res.render("../views/tests/ClassicConstructor.ejs")
-            // const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test } = req.body;
-            // const newTest = new Test(_id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test);
-            // const createdTest = await testService.addTest(newTest);
-            // return createdTest;
         } catch (error) {
             throw error;
         }
@@ -45,21 +40,21 @@ class TestController {
     async renderClassicConstructor(req, res) {
         try {
             res.render('../views/tests/ClassicConstructor');
-            
+
         } catch (error) {
             res.status(500).send('Внутренняя ошибка сервера');
         }
     }
 
-    async createClassicTest(req, res){
-        try{
+    async createClassicTest(req, res) {
+        try {
             //console.log(req.body)
             const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
-            const newTest = new Test(_id, 2, 3, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image , token_test, []);
+            const newTest = new Test(_id, 2, 3, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, []);
             await testService.addTest(newTest);
             res.render('../views/tests/ChangeTest');
         }
-        catch(e){
+        catch (e) {
             console.log(e);
             res.status(500).send('Внутренняя ошибка сервера');
 

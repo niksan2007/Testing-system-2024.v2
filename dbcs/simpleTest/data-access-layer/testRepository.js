@@ -18,24 +18,19 @@ class TestRepository{
     }
 
     async deleteTest(id){
-
-
         if(!id){
             throw new Error('Не указан ID');
         }
             const test = await testModel.findByIdAndDelete(id);
             return test;
-
     }
 
     async getTests(){
-
         const test = await testModel.find();
         return test;
     }
 
     async getTestById(id){
-
         if(!id){
             throw new Error('Не указан ID');
         }

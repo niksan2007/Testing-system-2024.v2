@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-//TODO:: В дипломе просто прописать какие коллекции используем, а не диаграммой
 const testSchema = new mongoose.Schema({
 
     numberQues:{
