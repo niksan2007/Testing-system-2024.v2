@@ -6,12 +6,14 @@ class TestController {
 
     async getTests(req, res) {
         try {
-            const tests = await testService.listTest();
-            return tests;
+            const tests = await testService.listTest(); // Предполагается, что testService.listTest() возвращает массив тестов
+            res.render('../views/users/ClassicTests', { tests });
         } catch (e) {
-            throw e;
+            console.error(e);
+            res.status(500).send('Server Error');
         }
     }
+
 
     async getTestById(req, res) {
         try {

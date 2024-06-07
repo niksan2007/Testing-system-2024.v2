@@ -125,3 +125,73 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('testForm');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+            count_que: formData.get('count_que'),
+            test_remaining: formData.get('test_remaining'),
+            topic: formData.get('topic'),
+            questions: []
+        };
+
+        const questionsContainer = document.getElementById('questionsContainer');
+        const questionElements = questionsContainer.getElementsByClassName('question');
+
+        Array.from(questionElements).forEach((questionElement, index) => {
+            const questionType = questionElement.querySelector('.questionType').value;
+            const questionText = questionElement.querySelector('textarea[name="questionText"]').value;
+            let answers = [];
+            let correctAnswers = [];
+
+            if (questionType === 'singleChoice' || questionType === 'multipleChoice') {
+                const answerOptions = questionElement.querySelectorAll('.answerOptions .input');
+                answerOptions.forEach(option => {
+                    const answerText = option.querySelector('textarea').value;
+                    const isCorrect = option.querySelector('input[type="checkbox"]').checked;
+                    answers.push(answerText);
+                    if (isCorrect) correctAnswers.push(answerText);
+                });
+            } else if (questionType === 'openEnded') {
+                const correctAnswer = questionElement.querySelector('textarea[name="openEndedAnswer"]').value;
+                correctAnswers.push(correctAnswer);
+            }
+
+            data.questions.push({
+                question: questionText,
+                questionType: questionType,
+                answer: answers,
+                correctanswer: correctAnswers
+            });
+        });
+
+        console.log(JSON.stringify(data, null, 2));
+
+        try {
+            const response = await fetch('/student/test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            console.log('Response from server:', result);
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    });
+});
+
