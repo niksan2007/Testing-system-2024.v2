@@ -1,45 +1,53 @@
+import userTest from '../entity/userTest';
 
-//TODO::Прописать логику проверки тестов
-module.exports = function makeCheckResult(db){
+export default function makeCheckResult(db){
     return async function CheckResult(result){
-    try {
-        // Получаем тест по его ID
-        const test = await db.getTestById(result.info_test[0].test_id);
-        
-        if (!test) {
-            throw new Error('Test not found');
-        }
+        try {
+            const { testId, studentId, lectorId, answers } = result;
 
-        // Инициализируем счетчики правильных и неправильных ответов
-        let correct_ans = 0;
-        let incorrect_ans = 0;
+            // Получаем тест из базы данных по testId
+            const test = await db.getTestById(testId);
 
-        // Проверяем ответы пользователя
-        result.query_answers.forEach((answer, index) => {
-            const question = test.answerOptions[index];
-            if (question.questionType === 'open') {
-                if (answer === question.openAnswer) {
-                    correct_ans++;
-                } else {
-                    incorrect_ans++;
-                }
-            } else {
-                const correctAnswers = question.correctAnswers;
-                if (Array.isArray(answer) && answer.every(ans => correctAnswers.includes(ans)) && answer.length === correctAnswers.length) {
-                    correct_ans++;
-                } else {
-                    incorrect_ans++;
-                }
+            if (!test) {
+                throw new Error('Test not found');
             }
-        });
-
-        // Записываем количество правильных и неправильных ответов
-        result.quantity = [{ correct_ans, incorrect_ans }];
-
-        return result;
-    } catch (e) {
-        console.error('Ошибка при проверке результата:', e);
-        throw e;
+        
+            let correctAnswers = 0;
+            let incorrectAnswers = 0;
+            let queryAnswers = [];
+        
+            // Проверяем ответы студента
+            test.answerOptions.forEach((question, index) => {
+                const studentAnswer = answers[index];
+                const correctAnswer = question.correctAnswer;
+            
+                if (JSON.stringify(studentAnswer).toLowerCase() === JSON.stringify(correctAnswer).toLowerCase()) {
+                    correctAnswers++;
+                } else {
+                    incorrectAnswers++;
+                }
+            
+                queryAnswers.push(studentAnswer);
+            });
+            
+            result = new userTest({
+                stud_id: studentId,
+                lector_id: lectorId,
+                info_test: [{
+                    test_id: testId,
+                    test_topic: test.topic
+                }],
+                query_answers: queryAnswers,
+                quantity: [{
+                    correct_ans: correctAnswers,
+                    incorrect_ans: incorrectAnswers
+                }],
+                temp_queries: []
+            });
+            
+        } catch (e) {
+            console.error('Ошибка при проверке результата:', e);
+            throw e;
+        }
     }
-}
 }

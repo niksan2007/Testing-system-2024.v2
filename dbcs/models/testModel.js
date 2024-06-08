@@ -60,24 +60,11 @@ const testSchema = new mongoose.Schema({
     },
     answerOptions:{
         type: [{
-            questionType: {
-                type: String,
-                enum: ['single', 'multiple', 'open'],
-                required: true
-            },
-            options: {
-                type: [String],
-                required: function() { return this.questionType !== 'open'; }  // Обязательно для вопросов с вариантами
-            },
-            correctAnswers: {
-                type: [String],
-                required: function() { return this.questionType !== 'open'; }  // Обязательно для вопросов с вариантами
-            },
-            openAnswer: {
-                type: String,
-                required: function() { return this.questionType === 'open'; }  // Обязательно для развернутых ответов
-            }
-        }],
+            statement:{type:String},
+            answers:{type:[String]},
+            correctAnswer:{type:[String]}
+        }
+        ],
         default: null
     }
 

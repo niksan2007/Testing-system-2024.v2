@@ -24,9 +24,6 @@ lectorRoute.get("/test",lecturerAuth, controllers.TestContoller.renderCreateTest
 lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.renderClassicConstructor)
 
 
-
-lectorRoute.get('/constructor', lecturerAuth,controllers.TestContoller.renderClassicConstructor);
-
 lectorRoute.post('/test', controllers.TestContoller.createClassicTest);
 
 

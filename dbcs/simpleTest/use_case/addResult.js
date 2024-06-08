@@ -1,7 +1,6 @@
-const checkResult = require("./checkResult");
+const checkResult = require("./checkResult").default;
 
 
-//TODO::Прописать логику создания результата проверки
 module.exports = function makeAddResult(db){
     return async function addResult(result){
         try{

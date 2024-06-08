@@ -58,8 +58,7 @@ class ResultController{
 
     async createResult(req, res){
         try {
-            const { stud_id,lector_id, info_test, query_answers, quantity, temp_queries } = req.body;
-            const newUserTest = new UserTest(stud_id,lector_id, info_test, query_answers, quantity, temp_queries);
+            const newUserTest = req.body;
             const result = await testService.addResult(newUserTest);
             return result;
         } catch (e) {
