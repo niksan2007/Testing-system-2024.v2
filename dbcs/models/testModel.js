@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const testSchema = new mongoose.Schema({
 
+    lector_id: mongoose.ObjectId,
+    
     numberQues:{
         type:Number,
         //require:true
