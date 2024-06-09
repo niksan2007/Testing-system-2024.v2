@@ -7,13 +7,14 @@ class TestController {
     async getTests(req, res) {
         try {
             const tests = await testService.listTest();
-            const testsWithId = tests.map(test => ({ ...test, testId: test._id }));
+            const testsWithId = tests.map(test => ({ ...test._doc, testId: test._id }));
             res.render('../views/users/ClassicTests', { tests: testsWithId });
         } catch (error) {
             console.error(error);
             res.status(500).send('Server Error');
         }
     }
+    
     
 
 
