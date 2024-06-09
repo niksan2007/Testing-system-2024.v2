@@ -1,6 +1,6 @@
 class Test{
     _id
-    lectorId
+    lector_id
     numberQues
     numberRemaining
     topic
@@ -15,9 +15,9 @@ class Test{
 
  
 
-    constructor(_id,lectorId,  numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image, token_test, answerOptions){
+    constructor(_id,lector_id,  numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable,scriptTableData,image, token_test, answerOptions){
         this._id = _id
-        this.lectorId = lectorId
+        this.lector_id = lector_id
         this.numberQues = numberQues
         this.numberRemaining = numberRemaining
         this.topic = topic

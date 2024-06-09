@@ -12,6 +12,9 @@
     <main>
         <% if (test) { %>
             <h2 class="test-topic"><%= test.topic %></h2>
+            <!-- Добавляем скрытые поля для передачи динамических значений -->
+            <input type="hidden" id="testId" value="<%= test._id %>">
+            <input type="hidden" id="lectorId" value="<%= test.lector_id %>">
             <form id="test-form">
                 <% test.answerOptions.forEach((question, index) => { %>
                     <div class="question">
@@ -39,12 +42,12 @@
                         <% } %>
                     </div>
                 <% }) %>
-                <button type="submit" id="submit-test" class="btn">Отправить тест</button>
+                <button type="button" id="submit-test" class="btn" onclick="submitTest()">Отправить тест</button>
             </form>
         <% } else { %>
             <p>Тест не найден</p>
         <% } %>
     </main>
-    <script src="/js_files/test_script.js"></script> <!-- Подключаем скрипт для работы с тестом -->
+    <script src="/css_files/test_script.js"></script> <!-- Подключаем скрипт для работы с тестом -->
 </body>
 </html>

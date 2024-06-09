@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 // Определение схемы
 const replyStudSchema = new mongoose.Schema({
     stud_id: mongoose.ObjectId,
-    lector_id: mongoose.ObjectId, // Добавляем поле lector_id
+    lector_id:{ type: mongoose.ObjectId, default: null },
+    
     info_test: [{
         test_id: mongoose.ObjectId,
         test_topic: String
