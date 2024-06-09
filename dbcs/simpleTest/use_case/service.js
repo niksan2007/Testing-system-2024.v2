@@ -7,7 +7,6 @@ const makeListTest = require('./listTest')
 const makeAddResult = require('./addResult')
 const makeRemoveTest = require('./removeTest')
 const makeGetResultByTopic = require('./getResultsByTopic')
-const makeCheckResult = require('./checkResult')
 
 const db = require('../data-access-layer/repository')
 
@@ -22,10 +21,9 @@ class TestService{
     
     getResultById = makeGetResult(db.ResultRepository)
     listResult = makeListResult(db.ResultRepository)
-    addResult = makeAddResult(db.ResultRepository)
+    addResult = makeAddResult(db)
     getResultByTopic = makeGetResultByTopic(db.ResultRepository)
 
-    checkResult = makeCheckResult(db.TestRepository)
 
 }
 

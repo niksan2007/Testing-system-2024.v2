@@ -1,53 +1,67 @@
 const userTest = require('../entity/userTest');
+const mongoose = require("mongoose");
 
-module.exports = function makeCheckResult(db){
-    return async function CheckResult(result, id){
+module.exports =  function CheckResult(test, testId, lectorId, answers, id){
         try {
-            const { testId, lectorId, answers } = result;
-
-            // Получаем тест из базы данных по testId
-            const test = await db.getTestById(testId);
-
-            if (!test) {
-                throw new Error('Test not found');
-            }
-        
             let correctAnswers = 0;
             let incorrectAnswers = 0;
             let queryAnswers = [];
         
             // Проверяем ответы студента
-            test.answerOptions.forEach((question, index) => {
-                const studentAnswer = answers[index];
-                const correctAnswer = question.correctAnswer;
+            try{
+                test.answerOptions.forEach((question, index) => {
+                    const studentAnswer = answers[index];
+                    const correctAnswer = question.correctanswer;
+    
+                    if (JSON.stringify(studentAnswer).toLowerCase() === JSON.stringify(correctAnswer).toLowerCase()) {
+                        correctAnswers++;
+                    } else {
+                        incorrectAnswers++;
+                    }
+                
+                    queryAnswers.push(studentAnswer);
+                });
+            }
+            catch {
+                test.answerOptions.forEach((question, index) => {
+                    const studentAnswer = answers[index];
+                    const correctAnswer = question.correctanswer;
+    
+                    if (JSON.stringify(studentAnswer) === JSON.stringify(correctAnswer)) {
+                        correctAnswers++;
+                    } else {
+                        incorrectAnswers++;
+                    }
+                
+                    queryAnswers.push(studentAnswer);
+                });
+            }
             
-                if (JSON.stringify(studentAnswer).toLowerCase() === JSON.stringify(correctAnswer).toLowerCase()) {
-                    correctAnswers++;
-                } else {
-                    incorrectAnswers++;
-                }
-            
-                queryAnswers.push(studentAnswer);
+            let flatList = [];
+            queryAnswers.forEach(sublist => {
+                sublist.forEach(item => {
+                    flatList.push(item);
+                });
             });
-            
-            result = new userTest({
-                stud_id: id,
-                lector_id: lectorId,
-                info_test: [{
-                    test_id: testId,
+            res = new userTest(
+                id,
+                new mongoose.Types.ObjectId(lectorId),
+                [{
+                    test_id: new mongoose.Types.ObjectId(testId),
                     test_topic: test.topic
                 }],
-                query_answers: queryAnswers,
-                quantity: [{
+                flatList,
+                [{
                     correct_ans: correctAnswers,
                     incorrect_ans: incorrectAnswers
                 }],
-                temp_queries: []
-            });
+                []
+            );
+            
+            return res
             
         } catch (e) {
             console.error('Ошибка при проверке результата:', e);
             throw e;
         }
     }
-}

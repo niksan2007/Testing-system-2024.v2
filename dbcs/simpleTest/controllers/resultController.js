@@ -61,7 +61,6 @@ class ResultController{
     async createResult(req, res){
         try {
             const newUserTest = req.body;
-            console.log(req.body);
             const result = await testService.addResult(newUserTest, new mongoose.Types.ObjectId(req.session.token_user));
             return result;
         } catch (e) {
