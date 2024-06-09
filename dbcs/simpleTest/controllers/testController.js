@@ -50,6 +50,7 @@ class TestController {
 
     async createClassicTest(req, res) {
         try {
+            console.log('Received request body:', req.body);
 
             const { _id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
             const newTest = new Test(_id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions);

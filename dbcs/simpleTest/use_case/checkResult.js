@@ -1,6 +1,6 @@
-import userTest from '../entity/userTest';
+const userTest = require('../entity/userTest');
 
-export default function makeCheckResult(db){
+module.exports = function makeCheckResult(db){
     return async function CheckResult(result){
         try {
             const { testId, studentId, lectorId, answers } = result;
