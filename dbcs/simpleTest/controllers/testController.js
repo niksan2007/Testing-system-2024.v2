@@ -50,9 +50,8 @@ class TestController {
 
     async createClassicTest(req, res) {
         try {
-
-            const { _id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
-            const newTest = new Test(_id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions);
+            const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
+            const newTest = new Test(_id, req.session.token_lecturer , numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions);
             await testService.addTest(newTest);
             res.render('../views/tests/ChangeTest');
         }
@@ -65,8 +64,8 @@ class TestController {
 
     async updateTest(req, res) {
         try {
-            const { _id,lectorId , numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
-            const updatedTest = new Test(_id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions);
+            const { _id, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
+            const updatedTest = new Test(_id,req.session.token_lecturer, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions);
             const result = await testService.editTest(req.params.id, updatedTest);
             if (result) {
                 return result;

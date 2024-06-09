@@ -59,7 +59,7 @@ class ResultController{
     async createResult(req, res){
         try {
             const newUserTest = req.body;
-            const result = await testService.addResult(newUserTest);
+            const result = await testService.addResult(newUserTest, req.session.token_user);
             return result;
         } catch (e) {
             throw e;

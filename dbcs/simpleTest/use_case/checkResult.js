@@ -1,9 +1,9 @@
 import userTest from '../entity/userTest';
 
 export default function makeCheckResult(db){
-    return async function CheckResult(result){
+    return async function CheckResult(result, id){
         try {
-            const { testId, studentId, lectorId, answers } = result;
+            const { testId, lectorId, answers } = result;
 
             // Получаем тест из базы данных по testId
             const test = await db.getTestById(testId);
@@ -31,7 +31,7 @@ export default function makeCheckResult(db){
             });
             
             result = new userTest({
-                stud_id: studentId,
+                stud_id: id,
                 lector_id: lectorId,
                 info_test: [{
                     test_id: testId,
