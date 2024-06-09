@@ -1,4 +1,4 @@
-import userTest from '../entity/userTest';
+const userTest = require('../entity/userTest');
 
 export default function makeCheckResult(db){
     return async function CheckResult(result, id){

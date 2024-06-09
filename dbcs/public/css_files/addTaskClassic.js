@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const formData = new FormData(form);
         const data = {
-            count_que: formData.get('count_que'),
-            test_remaining: formData.get('test_remaining'),
+            numberQues: formData.get('count_que'),
+            numberRemaining: formData.get('test_remaining'),
             topic: formData.get('topic'),
             questions: []
         };
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(JSON.stringify(data, null, 2));
 
         try {
-            const response = await fetch('/student/test', {
+            const response = await fetch('/lector/test', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

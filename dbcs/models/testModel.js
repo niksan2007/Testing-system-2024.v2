@@ -62,9 +62,10 @@ const testSchema = new mongoose.Schema({
     },
     answerOptions:{
         type: [{
-            statement:{type:String},
-            answers:{type:[String]},
-            correctAnswer:{type:[String]}
+            questionType: { type: String, enum: ['singleChoice', 'multipleChoice', 'openEnded'] },
+            question:{type:String},
+            answer:{type:[String]},
+            correctanswer:{type:[String]}
         }
         ],
         default: null

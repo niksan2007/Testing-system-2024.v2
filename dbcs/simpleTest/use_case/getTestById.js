@@ -1,10 +1,9 @@
-module.exports = function makeGetTest(db){
-    return async function getTest(test){
-        try{
-            return db.getTestById(test._id)
-        } catch (e){
-            throw e
+module.exports = function makeGetTest(db) {
+    return async function getTest(testId) { // Принимаем только testId
+        try {
+            return db.getTestById(testId); // Передаем testId
+        } catch (e) {
+            throw e;
         }
-        
-    } 
-}
+    };
+};

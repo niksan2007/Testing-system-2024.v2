@@ -1,4 +1,4 @@
-const r = require('express');
+ r = require('express');
 const userAuth = require("../middleware/userAuth");
 const lecturerAuth = require('../middleware/lecturerAuth')
 const controllers = require('../controllers/controllers')
