@@ -6,29 +6,34 @@ class TestController {
 
     async getTests(req, res) {
         try {
-            const tests = await testService.listTest(); // Предполагается, что testService.listTest() возвращает массив тестов
-            res.render('../views/users/ClassicTests', { tests });
-        } catch (e) {
-            console.error(e);
+            const tests = await testService.listTest();
+            const testsWithId = tests.map(test => ({ ...test, testId: test._id }));
+            res.render('../views/users/ClassicTests', { tests: testsWithId });
+        } catch (error) {
+            console.error(error);
             res.status(500).send('Server Error');
         }
     }
+    
 
 
     async getTestById(req, res) {
         try {
-            const test = await testService.getTest(req.params.id);
+            const testId = req.params.id;
+            const test = await testService.getTest(testId);
             if (test) {
-                return test;
+                console.log("Test found:", test);
+                res.render('../views/users/startClassicTest', { test }); // Передаем объект test для рендеринга
             } else {
-                const error = new Error('Test not found');
-                error.status = 404;
-                throw error;
+                console.error('Test not found');
+                res.status(404).send('Test not found');
             }
         } catch (error) {
-            throw error;
+            console.error('Error fetching test:', error);
+            res.status(500).send('Internal server error');
         }
     }
+    
 
 
     async renderCreateTest(req, res) {
@@ -52,8 +57,9 @@ class TestController {
         try {
             console.log('Received request body:', req.body);
 
-            const { _id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions } = req.body;
-            const newTest = new Test(_id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, answerOptions);
+            const { _id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, questions} = req.body;
+            const newTest = new Test(_id,lectorId, numberQues, numberRemaining, topic, problemStatement, problemPreview, problemSolution, scriptTable, scriptTableData, image, token_test, questions);
+            console.log('answeroptions:/n',newTest.answerOptions)
             await testService.addTest(newTest);
             res.render('../views/tests/ChangeTest');
         }
