@@ -16,7 +16,7 @@ class ResultController{
             const replies = await testService.listResult(lecturerId);
             const uniqueTestTopics = Array.from(new Set(replies.map(reply => reply.info_test[0]?.test_topic)))
                 .filter(topic => topic !== null);
-            console.log(__dirname)
+            console.log(uniqueTestTopics)
             res.render("../views/users/Results.ejs", { testTopics: uniqueTestTopics });
         } catch (error) {
             console.error('Ошибка при рендеринге страницы результатов:', error);
@@ -32,6 +32,7 @@ class ResultController{
             if (testTopic) {
                 // Если передан параметр testTopic, вызовем метод для получения результатов по теме теста
                 const students = await testService.getResultByTopic(testTopic);
+                console.log(students)
                 return res.render('../views/users/studentsByTestTopic', { students: students, testTopic: testTopic });
             } else if (id) {
                 // Если передан параметр id, вызовем метод для получения результатов по ID пользователя
@@ -62,6 +63,7 @@ class ResultController{
         try {
             const newUserTest = req.body;
             const result = await testService.addResult(newUserTest, new mongoose.Types.ObjectId(req.session.token_user));
+            console.log(result)
             return result;
         } catch (e) {
             throw e;
