@@ -1,13 +1,22 @@
 const isLogin = async(req,res,next)=>{
     try {
         if (req.session.token_lecturer) {
-
-        } else {
-            res.redirect('/home');
+            next();
+        } 
+        else {
+            if (req.session.token_user){
+                res.redirect('/home')
+            }else{
+                res.redirect('/');
+            } 
         }
-        next();
     } catch (error) {
-        console.log(error.message);
+        console.log("Не санкционированный доступ");
+        if (req.session.token_user){
+            res.redirect('/home')
+        }else{
+            res.redirect('/');
+        } 
     }
 }
 
