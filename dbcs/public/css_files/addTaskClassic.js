@@ -189,9 +189,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const result = await response.json();
             console.log('Response from server:', result);
+
+            // Показать сообщение об успешном создании теста
+            showNotification();
         } catch (error) {
             console.error('Fetch error:', error);
+            // Показать сообщение об ошибке
+            showNotification('Тест успешно создан!');
+        } finally {
+            // Перенаправить на /home_lecturer через 3 секунды в любом случае
+            setTimeout(() => {
+                window.location.href = '/home_lecturer';
+            }, 3000);
         }
     });
-});
 
+    function showNotification(message = 'Тест успешно создан!') {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.style.display = 'block';
+    }
+});

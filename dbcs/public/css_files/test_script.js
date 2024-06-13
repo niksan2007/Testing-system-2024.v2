@@ -1,4 +1,3 @@
-// Функция для отправки ответов на сервер
 async function submitTest() {
     // Получаем все ответы пользователя из формы
     const form = document.getElementById('test-form');
@@ -27,6 +26,14 @@ async function submitTest() {
     console.log(JSON.stringify(submission, null, 2));
 
     try {
+        // Показать сообщение об успешной отправке теста
+        showNotification();
+
+        // Перенаправить на /home через 3 секунды
+        setTimeout(() => {
+            window.location.href = '/home';
+        }, 3000);
+
         // Отправляем ответы на сервер методом POST
         const response = await fetch('/student/test', {
             method: 'POST',
@@ -46,5 +53,20 @@ async function submitTest() {
         console.log('Test submitted successfully:', result);
     } catch (error) {
         console.error('Error submitting test:', error);
+        // Показать сообщение об ошибке
+        showNotification('Произошла ошибка при отправке теста');
     }
 }
+
+function showNotification(message = 'Тест успешно отправлен!') {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const notificationElement = document.createElement('div');
+    notificationElement.id = 'notification';
+    notificationElement.classList.add('notification');
+    document.body.appendChild(notificationElement);
+});
