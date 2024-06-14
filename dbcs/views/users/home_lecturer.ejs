@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,37 +8,28 @@
     <link rel="stylesheet" href="/css_files/style_home_student.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
 <body>
-    <h2>Преподаватель</h2>
-    <%
-        if (user.image != null){
-            photo = user.image;
-        } else {
-            photo = "default.jpg"
-        }
-    %>
-    <div class="form-box">
-        <h3>Добро пожаловать, <%= user.name %></h3>
-        <table width="30%">
-            <tr>
-                <td><img src="userImages/<%= photo %>" width="150px" height="150px" alt="<%= user.image %>"></td>
-            </tr>
-            <tr>
-                <td>Почта</td>
-                <td><%= user.email %></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="register">
-        <a href="/edit_lecturer?id=<%= user._id %>">Редактировать</a>
-        <br>
-        <a href="/test_status">Просмотреть все тесты</a>
-        <br>
-        <a href="/ChangeTest">Создать тест</a>
-        <br>
-        <a href="/logout_lec">Выйти</a>
+    <div class="container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li><a href="/test_status"><i class='bx bx-list-ul'></i> Просмотреть все тесты</a></li>
+                <li><a href="/lector/test"><i class='bx bx-edit-alt'></i> Создать тест</a></li>
+                <li><a href="/results/result"><i class='bx bx-bar-chart'></i> Результаты</a></li>
+                <li><a href="/logout_lec"><i class='bx bx-log-out'></i> Выйти</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h2>Преподаватель</h2>
+            <h3>Добро пожаловать, <%= user.name %></h3>
+            <% if (user.image != null){ %>
+                <% photo = user.image; %>
+            <% } else { %>
+                <% photo = "default.jpg"; %>
+            <% } %>
+            <img src="userImages/<%= photo %>" width="150" height="150" alt="<%= user.image %>"
+            <p>Почта: <%= user.email %></p>
+            <a href="/edit_lecturer?id=<%= user._id %>" class="btn">Редактировать</a>
+        </div>
     </div>
 </body>
 </html>

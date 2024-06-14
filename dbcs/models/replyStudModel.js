@@ -1,33 +1,25 @@
 const mongoose = require("mongoose");
 
+// Определение схемы
 const replyStudSchema = new mongoose.Schema({
-
-    stud_id:mongoose.ObjectId,
-    info_test:{
-        type: [{
-            test_id: {type: mongoose.ObjectId},
-            test_topic: {type: String}
-        }],
-        default: null
-    },
-    query_answers:{
-        type:[String],
-        //required: true
-        default: null
-    },
-    quantity:{
-        type: [{
-            correct_ans: {type: Number},
-            incorrect_ans: {type: Number}
-        }],
-        default: null
-    },
-    temp_queries:{
-        type:[String],
-        //required: true
-        default: null
-    }
-
+    stud_id: mongoose.ObjectId,
+    lector_id:{ type: mongoose.ObjectId, default: null },
+    
+    info_test: [{
+        test_id: mongoose.ObjectId,
+        test_topic: String
+    }],
+    query_answers: [String],
+    quantity: [{
+        correct_ans: Number,
+        incorrect_ans: Number
+    }],
+    temp_queries: [String]
 });
 
+const ReplyStud = mongoose.model('ReplyStud', replyStudSchema);
+
+
+
+    
 module.exports = mongoose.model('ReplyStud', replyStudSchema);

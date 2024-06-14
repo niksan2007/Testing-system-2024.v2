@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ecf0f3; /* Фоновый цвет */
+    font-size: 1.6rem;
+    color: #2b3e51; /* Основной цвет текста */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    height: 100vh; /* Занимаем всю высоту экрана */
+    overflow-y: auto; /* Добавляем прокрутку, если контента много */
+}
+
+h1 {
+    margin: 20px 0; /* Отступ сверху и снизу */
+}
+
+.topics-container {
+    margin-top: 20px;
+}
+
+.topics-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Убираем отступы */
+}
+
+.topic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+.topic-item:hover {
+    background-color: #f1f1f1;
+}
+
+.btn {
+    background: none; /* Убираем фон кнопки */
+    color: #007bff; /* Цвет иконки */
+    padding: 5px; /* Размер отступов внутри кнопки */
+    border: none; /* Убираем границу кнопки */
+    cursor: pointer;
+    font-size: 16px; /* Размер иконки */
+    transition: color 0.3s; /* Плавное изменение цвета иконки при наведении */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.btn i {
+    margin-right: 5px;
+    font-size: 16px; /* Размер иконки */
+}
+
+.btn:hover {
+    color: #0056b3; /* Изменяем цвет иконки при наведении */
+}
+
+.btn img {
+    width: 32px; /* Устанавливаем ширину изображения */
+    height: auto; /* Автоматический подбор высоты */
+}

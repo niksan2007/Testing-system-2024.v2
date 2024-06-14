@@ -1,0 +1,47 @@
+<!-- studentsByTestTopic.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ученики, прошедшие тест по <%= testTopic %></title>
+    <link rel="stylesheet" href="/css_files/style_Students.css"> <!-- Подключаем CSS файл -->
+</head>
+<body>
+    <div class="container">
+        <h1>Ученики, прошедшие тест по <%= testTopic %></h1>
+        
+        <!-- Таблица с данными об учениках -->
+        <div class="students-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Группа</th> <!-- Добавляем столбец для группы -->
+                        <th>Верные ответы</th>
+                        <th>Из скольки</th>
+                        <th>Результат (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach(student => { %>
+                        <tr>
+                            <td><%= student.name %></td>
+                            <td><%= student.surname %></td>
+                            <td><%= student.group %></td> <!-- Отображаем группу -->
+                            <td><%= student.correctAnswers %></td>
+                            <td><%= student.totalQuestions %></td>
+                            <td><%= student.percentage.toFixed(2) %></td>
+                        </tr>
+                        <tr class="separator"></tr> <!-- Добавляем разделительную черту после каждой строки -->
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+

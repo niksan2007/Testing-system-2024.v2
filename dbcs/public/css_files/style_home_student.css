@@ -1,88 +1,170 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto';
-}
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
 
 body {
-    background-color: lightseagreen;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ecf0f3;
     font-size: 1.6rem;
-    font-family: "Open Sans", sans-serif;
     color: #2b3e51;
-}
-  
-h3 {
-    font-weight: 300;
-    text-align: center;
-}
-  
-.btn {
-    display: inline-block; /* Строчно-блочный элемент */
-    background: #3ca9e2; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
-    width: 50%;
-}
-  
-  
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-  
-table{
-    margin: 50px auto;
-    width: 640px;
-}
-  
-td{
-    background-color: #fff;
-    width: 35%;
-    margin: 30px auto;
-    text-align: center;
-    padding: 20px 0 0 0;
-    border-radius: 4px;
-    box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
-}
-  
-.validation {
-    display: none;
-    position: absolute;
-    content: " ";
-    height: 60px;
-    width: 30px;
-    right: 15px;
-    top: 0px;
-}
-  
-.form-box {
-    background-color: #fff;
-    width: 50%;
-    margin: 30px auto;
-    text-align: center;
-    padding: 10px 0 5px 0;
-    border-radius: 4px;
-    box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.register {
-    font-size: 1em;
-    color: black;
-    text-align: center;
-    margin: 25px 0 10px;
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.register a {
+.sidebar {
+    flex: 1 0 300px; /* Увеличиваем минимальную ширину блока */
+    background-color: #2b3e51;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu li {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.menu a {
+    color: #ffffff;
     text-decoration: none;
-    color: black;
-    font-weight: 600;
+    font-size: 1.6rem;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    width: calc(100% - 40px); /* Оставить место для отступов */
+    margin: 0 auto; /* Центрируем элементы */
 }
 
-.register a:hover {
-    text-decoration: underline;
+.menu a i {
+    margin-right: 10px;
+    font-size: 1.8rem;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    background-color: #007bff;
+    width: calc(100% - 40px); /* Поддерживаем ширину при наведении */
+}
+
+.menu a:hover i {
+    color: #ffffff;
+}
+
+.content {
+    flex: 3;
+    padding: 20px;
+    text-align: center;
+}
+
+.content h2 {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: block;
+    margin: 10px auto;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+img {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+}
+.test {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.test h3 {
+    margin-top: 0;
+}
+
+.test p {
+    font-size: 1.4rem;
+    color: #666666;
+}
+
+.test .btn {
+    background: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.test .btn:hover {
+    background-color: #0056b3;
+}
+.test-topic {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.answers {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.answers li {
+    margin-bottom: 10px;
+}
+.notification {
+    display: none; /* Скрыть по умолчанию */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
 }

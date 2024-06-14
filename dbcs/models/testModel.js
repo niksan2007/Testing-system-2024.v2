@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-
 const testSchema = new mongoose.Schema({
 
+    lector_id:{ type: mongoose.ObjectId, default: null },
+    
     numberQues:{
         type:Number,
         //require:true
@@ -57,6 +58,16 @@ const testSchema = new mongoose.Schema({
     token_test:{
         type:String,
         //require:true
+        default: null
+    },
+    answerOptions:{
+        type: [{
+            questionType: { type: String, enum: ['singleChoice', 'multipleChoice', 'openEnded'] },
+            question:{type:String},
+            answer:{type:[String]},
+            correctanswer:{type:[String]}
+        }
+        ],
         default: null
     }
 

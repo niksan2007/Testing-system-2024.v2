@@ -105,22 +105,7 @@ user_route.post('/edit-test', uploadTest.fields([
 user_route.get('/delete-test', userController.deleteTests);
 
 
-////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-// Маршрут для отображения страницы создания обычного теста
-user_route.get('/ClassicConstructor', lecturerAuth.isLogin, userController.createClassicTest);
-
-
-user_route.get('/ChangeTest', lecturerAuth.isLogin, userController.createChange);
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////
 
 
 

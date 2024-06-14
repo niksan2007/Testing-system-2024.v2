@@ -29,7 +29,7 @@ function showQuestionFields(questionContainer) {
             <div class="input">
             <br>
                 <label for="questionText">Постановка задачи:</label>
-                <textarea style="overflow:auto;resize:none" name="preview1" rows="5" cols="45"></textarea><br><br>
+                <textarea style="overflow:auto;resize:none" name="questionText" rows="5" cols="45"></textarea><br><br>
             </div>
             <div class="answerOptions">
                 <div class="input">
@@ -40,21 +40,21 @@ function showQuestionFields(questionContainer) {
                     <button type="button" onclick="removeAnswerOption(this)">Удалить</button>
                 </div>
             </div>
-            <button type="button" onclick="addAnswerOption(this)">Добавить вариант ответа</button>
+            <button type="button" class="add-answer-option-button" onclick="addAnswerOption(this)">Добавить вариант ответа</button>
         `;
     } else if (questionType === 'openEnded') {
         questionContent.innerHTML = `
             <div class="input">
             <br>
                 <label for="questionText">Постановка задачи:</label>
-                <textarea style="overflow:auto;resize:none" name="preview1" rows="5" cols="45"></textarea><br><br>
+                <textarea style="overflow:auto;resize:none" name="questionText" rows="5" cols="45"></textarea><br><br>
             </div>
         
             <div class="input">
                 <label for="openEndedQuestion">Вариант ответа:</label>
                 <textarea name="openEndedQuestion"></textarea>
                 <br>
-                <label for="openEndedQuestion">Правильный ответ:</label>
+                <label for="openEndedAnswer">Правильный ответ:</label>
                 <textarea name="openEndedAnswer"></textarea>
             </div>
         `;
@@ -124,4 +124,89 @@ document.addEventListener('DOMContentLoaded', function() {
             questionsContainer.removeChild(lastQuestion);
         }
     });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('testForm');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+            numberQues: formData.get('count_que'),
+            numberRemaining: formData.get('test_remaining'),
+            topic: formData.get('topic'),
+            questions: []
+        };
+
+        const questionsContainer = document.getElementById('questionsContainer');
+        const questionElements = questionsContainer.getElementsByClassName('question');
+
+        Array.from(questionElements).forEach((questionElement, index) => {
+            const questionType = questionElement.querySelector('.questionType').value;
+            const questionText = questionElement.querySelector('textarea[name="questionText"]').value;
+            let answers = [];
+            let correctAnswers = [];
+
+            if (questionType === 'singleChoice' || questionType === 'multipleChoice') {
+                const answerOptions = questionElement.querySelectorAll('.answerOptions .input');
+                answerOptions.forEach(option => {
+                    const answerText = option.querySelector('textarea').value;
+                    const isCorrect = option.querySelector('input[type="checkbox"]').checked;
+                    answers.push(answerText);
+                    if (isCorrect) correctAnswers.push(answerText);
+                });
+            } else if (questionType === 'openEnded') {
+                const correctAnswer = questionElement.querySelector('textarea[name="openEndedAnswer"]').value;
+                correctAnswers.push(correctAnswer);
+            }
+
+            data.questions.push({
+                question: questionText,
+                questionType: questionType,
+                answer: answers,
+                correctanswer: correctAnswers
+            });
+        });
+
+        console.log(JSON.stringify(data, null, 2));
+
+        try {
+            const response = await fetch('/lector/test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status} ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            console.log('Response from server:', result);
+
+            // Показать сообщение об успешном создании теста
+            showNotification();
+        } catch (error) {
+            console.error('Fetch error:', error);
+            // Показать сообщение об ошибке
+            showNotification('Тест успешно создан!');
+        } finally {
+            // Перенаправить на /home_lecturer через 3 секунды в любом случае
+            setTimeout(() => {
+                window.location.href = '/home_lecturer';
+            }, 3000);
+        }
+    });
+
+    function showNotification(message = 'Тест успешно создан!') {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.style.display = 'block';
+    }
 });

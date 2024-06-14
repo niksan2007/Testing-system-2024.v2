@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест</title>
+    <link rel="stylesheet" href="/css_files/style_home_student.css"> <!-- Подключаем стили для теста -->
+    <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap' rel='stylesheet'> <!-- Подключаем шрифт Roboto -->
+</head>
+<body>
+    <main>
+        <% if (test) { %>
+            <h2 class="test-topic"><%= test.topic %></h2>
+            <!-- Добавляем скрытые поля для передачи динамических значений -->
+            <input type="hidden" id="testId" value="<%= test._id %>">
+            <input type="hidden" id="lectorId" value="<%= test.lector_id %>">
+            <form id="test-form">
+                <% test.answerOptions.forEach((question, index) => { %>
+                    <div class="question">
+                        <h3>Вопрос <%= index + 1 %>: <%= question.question %></h3>
+                        <% if (question.questionType === 'singleChoice') { %>
+                            <ul class="answers">
+                                <% question.answer.forEach((answer, answerIndex) => { %>
+                                    <li>
+                                        <input type="radio" id="question<%= index %>_answer<%= answerIndex %>" name="question<%= index %>" value="<%= answer %>">
+                                        <label for="question<%= index %>_answer<%= answerIndex %>"><%= answer %></label>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else if (question.questionType === 'multipleChoice') { %>
+                            <ul class="answers">
+                                <% question.answer.forEach((answer, answerIndex) => { %>
+                                    <li>
+                                        <input type="checkbox" id="question<%= index %>_answer<%= answerIndex %>" name="question<%= index %>" value="<%= answer %>">
+                                        <label for="question<%= index %>_answer<%= answerIndex %>"><%= answer %></label>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else if (question.questionType === 'openEnded') { %>
+                            <textarea id="question<%= index %>_answer" name="question<%= index %>"></textarea>
+                        <% } %>
+                    </div>
+                <% }) %>
+                <button type="button" id="submit-test" class="btn" onclick="submitTest()">Отправить тест</button>
+            </form>
+        <% } else { %>
+            <p>Тест не найден</p>
+        <% } %>
+    </main>
+    <script src="/css_files/test_script.js"></script> <!-- Подключаем скрипт для работы с тестом -->
+</body>
+</html>

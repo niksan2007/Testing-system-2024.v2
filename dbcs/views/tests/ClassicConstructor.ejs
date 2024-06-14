@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конструктор тестов</title>
-    <link rel="stylesheet" href="/css_files/style_construct.css">
+    <link rel="stylesheet" href="/css_files/style_classic_construct.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form id="testForm">
         <section>
             <div class="main">
                 <fieldset>
@@ -59,7 +59,14 @@
                 </fieldset>
             </div>
         </section>
+
+        <div class="button_send">
+            <input type="submit" value="Создать тест" class="btn_up">
+        </div>
     </form>
+    <div id="notification" class="notification">
+        Тест успешно создан!
+    </div>
 
     <script src="/css_files/addTaskClassic.js"></script>
 </body>
